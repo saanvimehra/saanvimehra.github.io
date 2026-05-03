@@ -64,6 +64,39 @@
     gap: 24px;
     flex-wrap: wrap;
   }
+
+  .tooltip-wrap {
+    position: relative;
+    display: inline;
+  }
+
+  .tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    background: #1a1a17;
+    border: 0.5px solid #2e2e28;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #c8c4b8;
+    text-align: left;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .tooltip-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #e8e4d9;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .tooltip-wrap:hover .tooltip { display: block; }
 </style>
 </head>
 <body>
@@ -71,13 +104,13 @@
 
   <section>
     <p class="name">Saanvi Mehra</p>
-    <p>Delhi/ Philadelphia / San Francisco</p>
+    <p>Philadelphia / San Francisco</p>
   </section>
 
   <section>
-    <p>I'm a student in the M&T program at Penn, where I study finance @ Wharton and CSE @ Penn Engineering. I realised pretty early on that I love intersection sets. As a result, I've always sought problems that simulates multiple dimensions of who I am, sitting across agentic payments, stablecoin research, credit scoring, insurance infrastructure in India, and sensitivity optimization in multimodal ML and computer vision systems.</p>
+    <p>I'm a student in the M&T program at Penn, where I study finance @ Wharton and CS Eng @ Penn Engineering. I realised pretty early on that I love intersection sets. As a result, I've always sought problems that simulates multiple dimensions of who I am, sitting across agentic payments, stablecoin research, credit scoring, insurance infrastructure in India, and sensitivity optimization in multimodal ML and computer vision systems.</p>
     <p>I'm currently working at <a href="https://blockchain.capital" target="_blank">Blockchain Capital</a> as a research scholar. In the past, I built <a href="https://www.orbete.com" target="_blank">Orbete</a>, a credit layer for crypto based on stablecoin transaction behavior, and worked at <a href="https://stripe.com/newsroom/news/shopify-stripe-stablecoin-payments" target="_blank">Stripe</a> to better understand how payments reach meaningful scale. I've also spent time with Bullish, Zopper, Penn Blockchain, the Wharton Innovation Fund, and Wharton's Stevens Center Fintech Fellowship.</p>
-    <p>I grew up in Noida, a suburb of Delhi, India, with a strong sense of धर्म and कर्म shaped by my parents, the two most principled and hardworking people I know. I have a sister 6 years younger than me, who has taught me more about humanity than everything, everyone else, combined. <span style="color:#5abf7a">My favourite colour is green.</span> I use british english as a product of being an ICSE kid. I'm drawn to spirituality, Hinduism, and consciousness. I know, very 60s California. I've tried reading and translating Vedic scriptures on my own, instead of just the classic boring and overly cynical western philosophy college kids resort to in times of desperation, and more than a few of my quarter-, mid-, and end-life crises have been averted by my study of morality and the shapes it takes in my life. I take photos constantly. <a href="https://instagram.com/saanvivsmehra" target="_blank">@saanvivsmehra</a></p>
+    <p>I grew up in Noida, a suburb of Delhi, India, with a strong sense of <span class="tooltip-wrap"><a href="https://en.wikipedia.org/wiki/Dharma" target="_blank">धर्म</a><span class="tooltip"><span class="tooltip-title">Dharma</span>In Hinduism, dharma signifies behaviours considered to be in accord with the order that makes life and the universe possible — duty, law, ethics, and right action.</span></span> and <span class="tooltip-wrap"><a href="https://en.wikipedia.org/wiki/Karma" target="_blank">कर्म</a><span class="tooltip"><span class="tooltip-title">Karma</span>In Indian religions, karma is the concept of action, work, or deed and its effect on the future of an individual — the spiritual principle of cause and effect.</span></span> shaped by my parents, the two most principled and hardworking people I know. I have a sister 6 years younger than me, who has taught me more about humanity than everything, everyone else, combined. <span style="color:#5abf7a">My favourite colour is green.</span> I use british english as a product of being an ICSE kid. I'm drawn to spirituality, Hinduism, and consciousness. I know, very 60s California. I've tried reading and translating Vedic scriptures on my own, instead of just the classic boring and overly cynical western philosophy college kids resort to in times of desperation, and more than a few of my quarter-, mid-, and end-life crises have been averted by my study of morality and the shapes it takes in my life. I take photos constantly. <a href="https://instagram.com/saanvivsmehra" target="_blank">@saanvivsmehra</a></p>
   </section>
 
   <section>
