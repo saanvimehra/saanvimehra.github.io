@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Essays I Never Got To Send In — Saanvi Mehra</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0f0f0d;
+    color: #e8e4d9;
+    font-family: Times, 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.7;
+    padding: 80px 0;
+    transition: background 0.25s, color 0.25s;
+  }
+  body.light {
+    background: #ffffff;
+    color: #111111;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 48px; }
+  a { color: #5abf7a; text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: #7dd494; }
+  p { text-align: justify; }
+  p + p { margin-top: 14px; }
+  .back { font-size: 14px; margin-bottom: 52px; display: block; }
+  .meta { font-size: 14px; margin-bottom: 8px; }
+  h1 { font-size: 24px; font-weight: 700; line-height: 1.3; margin-bottom: 48px; }
+  strong { font-weight: 700; }
+  .toggle-wrap { position: fixed; top: 28px; right: 36px; z-index: 100; }
+  .toggle {
+    background: none; border: none; cursor: pointer;
+    font-size: 13px; color: #e8e4d9;
+    text-decoration: underline; text-underline-offset: 3px;
+    padding: 0; font-family: Times, 'Times New Roman', serif;
+    transition: color 0.25s;
+  }
+  body.light .toggle { color: #111111; font-family: Helvetica, Arial, sans-serif; }
+</style>
+</head>
+<body>
+
+<div class="toggle-wrap">
+  <button class="toggle" onclick="toggleMode()" id="toggle-btn">light</button>
+</div>
+
+<div class="container">
+  <a class="back" href="/">← saanvimehra.com</a>
+  <p class="meta">2022-12</p>
+  <h1>College Essays I Never Got To Send In</h1>
+  <p>
+<strong>The Stanford community is deeply curious and driven to learn in and out of the classroom. Reflect on an idea or experience that makes you genuinely excited about learning. (100 word min, 250 word max)</strong>
+</p>
+<p>
+"That looks like a chicken nugget!"
+</p>
+<p>
+Words one doesn't want to hear when their thumb is the object being referred to.
+</p>
+<p>
+This mundane third-grader banter sparked an intense fascination on the unlikeliest of subjects - thumbs. In fact, it became the first thing I noticed on meeting someone new. The fingers seemed to fade away into oblivion.
+</p>
+<p>
+This newfound interest led me to take notice of how different people used their thumbs. While helping my nanny file for some bank papers, I realized that stamping her thumb was her official signature. The magnitude of the thumb's significance for the vast majority of the Indian population sank in then.
+</p>
+<p>
+Again, helping her set up her brand new mobile phone made me realize that she didn't quite understand how to type, but she quickly mastered playing songs and making calls with her thumbs.
+</p>
+<p>
+We give too much importance to our fingers. It is the thumbs that drive technological revolutions.
+</p>
+<p>
+Technology is an enabler - an uplifter - for billions.
+</p>
+<p>
+And while working at the cutting edge of technology has its own charm, even technologically simplistic solutions can revolutionize any field they are applied to - helping developing countries leapfrog physical infrastructure deficiencies, especially in remote areas.
+</p>
+<p>
+I have tried to devote my academic career to not simply learn about technology, but to equip myself with the skills necessary to make it accessible. Through my Mobile Apps facilitating Down Syndrome Detection and VidyaDaan (Book Donation), I've attempted to not just engineer innovative solutions - but solutions that simultaneously simplify and amplify technology for solving global challenges.
+</p>
+<p>
+My true calling lies in developing technology that expands the frontiers of humankind by making scientific advancements universally available. I hope to take technology from fingers (representative of literacy, demanding complexity and more advanced machines such as laptops) to thumbs (simple, sans-bells and whistles solutions). That is the true essence of 'technology for the masses' for me.
+</p>
+<hr style="border:none;border-top:0.5px solid rgba(255,255,255,0.1);margin:2rem 0">
+<p>
+<strong>Virtually all of Stanford's undergraduates live on campus. Write a note to your future roommate that reveals something about you or that will help your roommate – and us – get to know you better.</strong>
+</p>
+<p>
+Hi :)
+</p>
+<p>
+I know this is an extremely polarizing, political first question, but - what do you think of cilantro?
+</p>
+<p>
+Let me begin describing my relationship with this holy green ($).
+</p>
+<p>
+Truth be told, I'm perplexed every time someone aware of my culinary prowess asks me to prepare "Indian food". To dilute the vibrancy of over 30,000 different types of cuisines by grouping them all under a single, banal umbrella term is… <em>scandalized dramatic gasp</em>. On top of that, no two provinces prepare the same dish in the same manner. The possibilities, flavors, spices, zest - all of it is exhilarating.
+</p>
+<p>
+The single unifying factor in this ever-evolving, vivacious food scene is the consideration of Cilantro as the all-star. From tangy chutneys to divine chaats, rich pulaos to delectable curries, all bow down to the supreme commander of the Great Indian Kitchen. Not only does Cilantro impart a distinct nuance and freshness of its own, but it also enhances the flavor of every other ingredient in the dish - ensuring that one single bite makes you feel happy in a million different ways.
+</p>
+<p>
+I apologize for the disappointment, but your roommate officially strives to be a dhaniya typa kid.
+</p>
+<p>
+Wait! Let me justify myself. I believe that intelligent people with a drive to learn are awe-inspiring. Truly. But, people who not only pave a way for themselves, but bring out the best in each person surrounding them - they are the torch-bearers of our future.
+</p>
+<p>
+Here's to a future full of Cilantro and Cilantro people.
+</p>
+<p>
+xxx
+ 
+Saanvi
+</p>
+</div>
+
+
+<script>
+  const body = document.body;
+  const btn = document.getElementById('toggle-btn');
+  if (localStorage.getItem('mode') === 'light') {
+    body.classList.add('light');
+    btn.textContent = 'dark';
+  }
+  function toggleMode() {
+    body.classList.toggle('light');
+    const isLight = body.classList.contains('light');
+    btn.textContent = isLight ? 'dark' : 'light';
+    localStorage.setItem('mode', isLight ? 'light' : 'dark');
+  }
+</script>
+
+</body>
+</html>

@@ -15,6 +15,13 @@
     font-weight: 400;
     line-height: 1.7;
     padding: 80px 0;
+    transition: background 0.25s, color 0.25s;
+  }
+
+  body.light {
+    background: #ffffff;
+    color: #111111;
+    font-family: Helvetica, Arial, sans-serif;
   }
 
   .container {
@@ -23,9 +30,7 @@
     padding: 0 48px;
   }
 
-  p {
-    text-align: justify;
-  }
+  p { text-align: justify; }
 
   a {
     color: #5abf7a;
@@ -54,21 +59,43 @@
     margin-bottom: 5px;
   }
 
-  .writing-list .date {
-    flex-shrink: 0;
-    width: 72px;
-  }
+  .writing-list .date { flex-shrink: 0; width: 72px; }
 
   .links-row {
     display: flex;
     gap: 24px;
     flex-wrap: wrap;
+    align-items: center;
   }
 
-  .tooltip-wrap {
-    position: relative;
-    display: inline;
+  /* toggle — sits top right */
+  .toggle-wrap {
+    position: fixed;
+    top: 28px;
+    right: 36px;
+    z-index: 100;
   }
+
+  .toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: #e8e4d9;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 0;
+    transition: color 0.25s;
+    font-family: Times, 'Times New Roman', serif;
+  }
+
+  body.light .toggle {
+    color: #111111;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  /* tooltip */
+  .tooltip-wrap { position: relative; display: inline; }
 
   .tooltip {
     display: none;
@@ -88,6 +115,12 @@
     pointer-events: none;
   }
 
+  body.light .tooltip {
+    background: #f0f0f0;
+    border-color: #cccccc;
+    color: #111111;
+  }
+
   .tooltip-title {
     font-size: 13px;
     font-weight: 700;
@@ -96,43 +129,37 @@
     display: block;
   }
 
+  body.light .tooltip-title { color: #111111; }
+
   .tooltip-wrap:hover .tooltip { display: block; }
 </style>
 </head>
 <body>
+
+<div class="toggle-wrap">
+  <button class="toggle" onclick="toggleMode()" id="toggle-btn">light</button>
+</div>
+
 <div class="container">
 
   <section>
     <p class="name">Saanvi Mehra</p>
-    <p>Philadelphia / San Francisco</p>
+    <p>Delhi / Philadelphia / San Francisco</p>
   </section>
 
   <section>
     <p>I'm a student in the M&T program at Penn, where I study finance @ Wharton and CS Eng @ Penn Engineering. I realised pretty early on that I love intersection sets. As a result, I've always sought problems that simulates multiple dimensions of who I am, sitting across agentic payments, stablecoin research, credit scoring, insurance infrastructure in India, and sensitivity optimization in multimodal ML and computer vision systems.</p>
     <p>I'm currently working at <a href="https://blockchain.capital" target="_blank">Blockchain Capital</a> as a research scholar. In the past, I built <a href="https://www.orbete.com" target="_blank">Orbete</a>, a credit layer for crypto based on stablecoin transaction behavior, and worked at <a href="https://stripe.com/newsroom/news/shopify-stripe-stablecoin-payments" target="_blank">Stripe</a> to better understand how payments reach meaningful scale. I've also spent time with Bullish, Zopper, Penn Blockchain, the Wharton Innovation Fund, and Wharton's Stevens Center Fintech Fellowship.</p>
-    <p>I grew up in Noida, a suburb of Delhi, India, with a strong sense of <span class="tooltip-wrap"><a href="https://en.wikipedia.org/wiki/Dharma" target="_blank">धर्म</a><span class="tooltip"><span class="tooltip-title">Dharma</span>In Hinduism, dharma signifies behaviours considered to be in accord with the order that makes life and the universe possible — duty, law, ethics, and right action.</span></span> and <span class="tooltip-wrap"><a href="https://en.wikipedia.org/wiki/Karma" target="_blank">कर्म</a><span class="tooltip"><span class="tooltip-title">Karma</span>In Indian religions, karma is the concept of action, work, or deed and its effect on the future of an individual — the spiritual principle of cause and effect.</span></span> shaped by my parents, the two most principled and hardworking people I know. I have a sister 6 years younger than me, who has taught me more about humanity than everything, everyone else, combined. <span style="color:#5abf7a">My favourite colour is green.</span> I use british english as a product of being an ICSE kid. I'm drawn to spirituality, Hinduism, and consciousness. I know, very 60s California. I've tried reading and translating Vedic scriptures on my own, instead of just the classic boring and overly cynical western philosophy college kids resort to in times of desperation, and more than a few of my quarter-, mid-, and end-life crises have been averted by my study of morality and the shapes it takes in my life. I take photos constantly. <a href="https://instagram.com/saanvivsmehra" target="_blank">@saanvivsmehra</a></p>
+    <p>I grew up in Noida, a suburb of Delhi, India, with a strong sense of <span class="tooltip-wrap"><a href="https://en.wikipedia.org/wiki/Dharma" target="_blank">धर्म</a><span class="tooltip"><span class="tooltip-title">Dharma</span>In Hinduism, dharma signifies behaviours considered to be in accord with the order that makes life and the universe possible — duty, law, ethics, and right action.</span></span> and <span class="tooltip-wrap"><a href="https://en.wikipedia.org/wiki/Karma" target="_blank">कर्म</a><span class="tooltip"><span class="tooltip-title">Karma</span>In Indian religions, karma is the concept of action, work, or deed and its effect on the future of an individual — the spiritual principle of cause and effect.</span></span> shaped by my parents, the two most principled and hardworking people I know. I have a sister 6 years younger than me, who has taught me more about humanity than everything, everyone else, combined. <span style="color:#5abf7a">My favourite colour is green.</span></p>
+    <p>I use British English as a product of being an ICSE kid. I'm drawn to spirituality, Hinduism, and consciousness. I know, very 60s California. I've tried reading and translating Vedic scriptures on my own, instead of and in addition to just the nihilistic and stoic western philosophy college kids resort to in times of desperation, and more than a few of my quarter-, mid-, and end-life crises have been averted by my study of morality and the shapes it takes in my life. I take photos constantly. <a href="https://instagram.com/saanvivsmehra" target="_blank">@saanvivsmehra</a></p>
   </section>
 
   <section>
     <p>writing</p>
     <br>
     <ul class="writing-list">
-      <!--
-        Format:
-        <li>
-          <span class="date">Mon YYYY</span>
-          <a href="URL">Title</a>
-        </li>
-      -->
-      <li><span class="date">May 2025</span><a href="#">Add your first piece here</a></li>
-      <li><span class="date">Apr 2025</span><a href="#">Another essay or thread</a></li>
+      <li><span class="date">Dec 2022</span><a href="writing/stanford-essays.html">College Essays I Never Got To Send In</a></li>
     </ul>
-  </section>
-
-  <section>
-    <p>cv</p>
-    <br>
-    <p><a href="resume.pdf" download>resume.pdf</a></p>
   </section>
 
   <section>
@@ -144,5 +171,22 @@
   </section>
 
 </div>
+
+<script>
+  const body = document.body;
+  const btn = document.getElementById('toggle-btn');
+
+  if (localStorage.getItem('mode') === 'light') {
+    body.classList.add('light');
+    btn.textContent = 'dark';
+  }
+
+  function toggleMode() {
+    body.classList.toggle('light');
+    const isLight = body.classList.contains('light');
+    btn.textContent = isLight ? 'dark' : 'light';
+    localStorage.setItem('mode', isLight ? 'light' : 'dark');
+  }
+</script>
 </body>
 </html>

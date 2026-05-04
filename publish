@@ -1,0 +1,19 @@
+#!/bin/bash
+# publish "your message"
+# Builds essays from markdown, then pushes to GitHub.
+
+MSG="${1:-update site}"
+
+echo ""
+echo "  → building essays..."
+python3 build.py
+
+echo ""
+echo "  → pushing: \"$MSG\""
+git add .
+git commit -m "$MSG"
+git push origin main
+
+echo ""
+echo "  ✓ live at saanvimehra.com in ~30 seconds"
+echo ""
