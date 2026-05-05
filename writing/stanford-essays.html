@@ -18,6 +18,8 @@
   body.light {
     background: #ffffff;
     color: #111111;
+  }
+  body.chill {
     font-family: Helvetica, Arial, sans-serif;
   }
   .container { max-width: 780px; margin: 0 auto; padding: 0 48px; }
@@ -29,21 +31,25 @@
   .meta { font-size: 14px; margin-bottom: 8px; }
   h1 { font-size: 24px; font-weight: 700; line-height: 1.3; margin-bottom: 48px; }
   strong { font-weight: 700; }
-  .toggle-wrap { position: fixed; top: 28px; right: 36px; z-index: 100; }
+  .toggle-wrap {
+    position: fixed; top: 28px; right: 36px; z-index: 100;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  }
   .toggle {
     background: none; border: none; cursor: pointer;
     font-size: 13px; color: #e8e4d9;
     text-decoration: underline; text-underline-offset: 3px;
-    padding: 0; font-family: Times, 'Times New Roman', serif;
+    padding: 0; font-family: inherit;
     transition: color 0.25s;
   }
-  body.light .toggle { color: #111111; font-family: Helvetica, Arial, sans-serif; }
+  body.light .toggle { color: #111111; }
 </style>
 </head>
 <body>
 
 <div class="toggle-wrap">
   <button class="toggle" onclick="toggleMode()" id="toggle-btn">light</button>
+  <button class="toggle" onclick="toggleFont()" id="font-btn">chill</button>
 </div>
 
 <div class="container">
@@ -122,15 +128,30 @@ Saanvi
 <script>
   const body = document.body;
   const btn = document.getElementById('toggle-btn');
+  const fontBtn = document.getElementById('font-btn');
+
   if (localStorage.getItem('mode') === 'light') {
     body.classList.add('light');
     btn.textContent = 'dark';
   }
+
+  if (localStorage.getItem('font') === 'chill') {
+    body.classList.add('chill');
+    fontBtn.textContent = 'fancy';
+  }
+
   function toggleMode() {
     body.classList.toggle('light');
     const isLight = body.classList.contains('light');
     btn.textContent = isLight ? 'dark' : 'light';
     localStorage.setItem('mode', isLight ? 'light' : 'dark');
+  }
+
+  function toggleFont() {
+    body.classList.toggle('chill');
+    const isChill = body.classList.contains('chill');
+    fontBtn.textContent = isChill ? 'fancy' : 'chill';
+    localStorage.setItem('font', isChill ? 'chill' : 'fancy');
   }
 </script>
 

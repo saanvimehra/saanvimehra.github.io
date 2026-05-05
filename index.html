@@ -21,6 +21,9 @@
   body.light {
     background: #ffffff;
     color: #111111;
+  }
+
+  body.chill {
     font-family: Helvetica, Arial, sans-serif;
   }
 
@@ -68,12 +71,16 @@
     align-items: center;
   }
 
-  /* toggle — sits top right */
+  /* toggles — sit top right */
   .toggle-wrap {
     position: fixed;
     top: 28px;
     right: 36px;
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
   }
 
   .toggle {
@@ -86,12 +93,11 @@
     text-underline-offset: 3px;
     padding: 0;
     transition: color 0.25s;
-    font-family: Times, 'Times New Roman', serif;
+    font-family: inherit;
   }
 
   body.light .toggle {
     color: #111111;
-    font-family: Helvetica, Arial, sans-serif;
   }
 
   /* tooltip */
@@ -138,6 +144,7 @@
 
 <div class="toggle-wrap">
   <button class="toggle" onclick="toggleMode()" id="toggle-btn">light</button>
+  <button class="toggle" onclick="toggleFont()" id="font-btn">chill</button>
 </div>
 
 <div class="container">
@@ -175,10 +182,16 @@
 <script>
   const body = document.body;
   const btn = document.getElementById('toggle-btn');
+  const fontBtn = document.getElementById('font-btn');
 
   if (localStorage.getItem('mode') === 'light') {
     body.classList.add('light');
     btn.textContent = 'dark';
+  }
+
+  if (localStorage.getItem('font') === 'chill') {
+    body.classList.add('chill');
+    fontBtn.textContent = 'fancy';
   }
 
   function toggleMode() {
@@ -186,6 +199,13 @@
     const isLight = body.classList.contains('light');
     btn.textContent = isLight ? 'dark' : 'light';
     localStorage.setItem('mode', isLight ? 'light' : 'dark');
+  }
+
+  function toggleFont() {
+    body.classList.toggle('chill');
+    const isChill = body.classList.contains('chill');
+    fontBtn.textContent = isChill ? 'fancy' : 'chill';
+    localStorage.setItem('font', isChill ? 'chill' : 'fancy');
   }
 </script>
 </body>
