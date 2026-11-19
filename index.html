@@ -1,216 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<!-- Built by the mango notebook. -->
+<html lang="en-GB">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saanvi Mehra</title>
-<link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicon.png" sizes="any">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: #0f0f0d;
-    color: #e8e4d9;
-    font-family: Times, 'Times New Roman', serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.7;
-    padding: 80px 0;
-    transition: background 0.25s, color 0.25s;
-  }
-
-  body.light {
-    background: #ffffff;
-    color: #111111;
-  }
-
-  body.chill {
-    font-family: Helvetica, Arial, sans-serif;
-  }
-
-  .container {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0 48px;
-  }
-
-  p { text-align: justify; }
-
-  a {
-    color: #5abf7a;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-color: #5abf7a;
-  }
-
-  a:hover { color: #7dd494; }
-
-  .name {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.3;
-  }
-
-  section { margin-bottom: 52px; }
-
-  p + p { margin-top: 12px; }
-
-  .writing-list { list-style: none; }
-
-  .writing-list li {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 5px;
-  }
-
-  .writing-list .date { flex-shrink: 0; width: 72px; }
-
-  .links-row {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  /* toggles — sit top right */
-  .toggle-wrap {
-    position: fixed;
-    top: 28px;
-    right: 36px;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
-  }
-
-  .toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 13px;
-    color: #e8e4d9;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    padding: 0;
-    transition: color 0.25s;
-    font-family: inherit;
-  }
-
-  body.light .toggle {
-    color: #111111;
-  }
-
-  /* tooltip */
-  .tooltip-wrap { position: relative; display: inline; }
-
-  .tooltip {
-    display: none;
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 260px;
-    background: #1a1a17;
-    border: 0.5px solid #2e2e28;
-    padding: 12px 14px;
-    font-size: 13px;
-    line-height: 1.6;
-    color: #c8c4b8;
-    text-align: left;
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  body.light .tooltip {
-    background: #f0f0f0;
-    border-color: #cccccc;
-    color: #111111;
-  }
-
-  .tooltip-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: #e8e4d9;
-    margin-bottom: 6px;
-    display: block;
-  }
-
-  body.light .tooltip-title { color: #111111; }
-
-  .tooltip-wrap:hover .tooltip { display: block; }
-</style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saanvi Mehra · Under the mango tree</title>
+<meta name="description" content="Notes and essays from Saanvi Mehra’s mango tree.">
+<link rel="icon" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="assets/garden.css">
+<script src="assets/garden.js" defer></script>
 </head>
 <body>
-
-<div class="toggle-wrap">
-  <button class="toggle" onclick="toggleMode()" id="toggle-btn">light</button>
-  <button class="toggle" onclick="toggleFont()" id="font-btn">chill</button>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+<a class="brand" href="index.html"><img src="favicon-32.png" width="25" height="25" alt="">Saanvi Mehra</a>
+<nav aria-label="Main navigation"><a aria-current="page" href="index.html">Tree</a><a href="garden/index.html">Notebook</a><a href="connections/index.html">Connections</a><a href="about/index.html">About</a></nav>
+</header>
+<main id="main"><section class="hero" aria-labelledby="hero-title">
+<div class="opening">
+<figure class="epigraph"><blockquote>“taste this mango”</blockquote><figcaption><span></span><a href="notes/first-mango.html">John Agard</a></figcaption></figure>
+<h1 id="hero-title">Under the<br><em>mango tree.</em></h1>
+<p class="intro">I’m Saanvi. I grew up in Noida, build payment systems at Natural, and insist on the <em>u</em> in <em>colour</em>.</p>
 </div>
-
-<div class="container">
-
-  <section>
-    <p class="name">Saanvi Mehra</p>
-    <p>Delhi / Philadelphia / San Francisco</p>
-  </section>
-
-  <section>
-    <p>I'm a student in the M&T program at Penn, where I study finance @ Wharton and CS Eng @ Penn Engineering. Set Theory was one of the first mathematical concepts I was exposed to. I realised pretty early on that I love intersection sets. As a result, I've always sought problems that simulates multiple dimensions of who I am, sitting across agentic payments, stablecoin research, credit scoring, insurance infrastructure in India, and sensitivity optimization in multimodal ML and computer vision systems.</p>
-    <p>I'm currently working at <a href="https://www.natural.com/" target="_blank">Natural</a> as an Engineer. In the past, I built <a href="https://www.orbete.com" target="_blank">Orbete</a>, a credit layer based on stablecoin transaction behavior, and worked at Stripe to better understand how payments reach meaningful scale. I've also spent time with Blockchain Capital, Bullish, Zopper, Penn Blockchain, the Wharton Innovation Fund, and Wharton's Stevens Center Fintech Fellowship.</p>
-    <p>I grew up in Noida, a suburb of Delhi, India, with a strong sense of <span class="tooltip-wrap"><a href="https://en.wikipedia.org/wiki/Dharma" target="_blank">धर्म</a><span class="tooltip"><span class="tooltip-title">Dharma</span>In Hinduism, dharma signifies behaviours considered to be in accord with the order that makes life and the universe possible — duty, law, ethics, and right action.</span></span> and <span class="tooltip-wrap"><a href="https://en.wikipedia.org/wiki/Karma" target="_blank">कर्म</a><span class="tooltip"><span class="tooltip-title">Karma</span>In Indian religions, karma is the concept of action, work, or deed and its effect on the future of an individual — the spiritual principle of cause and effect.</span></span> shaped by my parents, the two most principled and hardworking people I know. I have a sister 6 years younger than me, who has taught me more about humanity than everything, everyone else, combined. <span style="color:#5abf7a">My favourite colour is green.</span> I use British English because I studied in the particularly colonially influenced ICSE board. It has caused more bugs than I'd liked to admit because of my insistence on seeing the letters <em>our</em> together.</p>
-    <p>I'm drawn to spirituality, Hinduism, and consciousness (which is oddly in line with both the <a href="https://open.spotify.com/playlist/2CtuTKnN1cK7LrX2Y8d1EP?si=6d9834631d1142b0" target="_blank">70s California</a> tech bro I aspire to be and the <span class="tooltip-wrap"><a href="https://en.wikipedia.org/wiki/Advaita_Vedanta" target="_blank">Advaita Vedantic</a><span class="tooltip"><span class="tooltip-title">Advaita Vedanta</span>A Hindu non-dual philosophy meaning "not two". It teaches that the individual soul (Atman) and the ultimate absolute reality (Brahman) are identical.</span></span> monkdom that I hope finds me one day). I've tried reading and translating Vedic scriptures on my own, in addition to the nihilistic, stoic western philosophy college kids are expected to resort to in times of desperation. All of it and none of it makes sense. I try to be intentional, but am very aware of the futility of it, so I just take joy in the beauty of it all: <a href="https://instagram.com/saanvivsmehra" target="_blank">@saanvivsmehra</a></p>
-  </section>
-
-  <section>
-    <p>writing</p>
-    <br>
-    <ul class="writing-list">
-      <li><span class="date">May 2025</span><a href="https://www.natural.com/blog/why-saanvi-joined-natural" target="_blank">Lucky #13</a></li>
-      <li><span class="date">Dec 2022</span><a href="https://saanvimehra.medium.com/college-essays-i-never-got-to-send-in-e5ca7dd2ac97" target="_blank">College Essays I Never Got To Send In</a></li>
-    </ul>
-  </section>
-
-  <section>
-    <div class="links-row">
-      <a href="https://x.com/saanvimehra" target="_blank">twitter</a>
-      <a href="https://www.linkedin.com/in/saanvimehra/" target="_blank">linkedin</a>
-      <a href="https://github.com/saanvimehra" target="_blank">github</a>
-    </div>
-  </section>
-
-</div>
-
-<script>
-  const body = document.body;
-  const btn = document.getElementById('toggle-btn');
-  const fontBtn = document.getElementById('font-btn');
-
-  if (localStorage.getItem('mode') === 'light') {
-    body.classList.add('light');
-    btn.textContent = 'dark';
-  }
-
-  if (localStorage.getItem('font') === 'chill') {
-    body.classList.add('chill');
-    fontBtn.textContent = 'fancy';
-  }
-
-  function toggleMode() {
-    body.classList.toggle('light');
-    const isLight = body.classList.contains('light');
-    btn.textContent = isLight ? 'dark' : 'light';
-    localStorage.setItem('mode', isLight ? 'light' : 'dark');
-  }
-
-  function toggleFont() {
-    body.classList.toggle('chill');
-    const isChill = body.classList.contains('chill');
-    fontBtn.textContent = isChill ? 'fancy' : 'chill';
-    localStorage.setItem('font', isChill ? 'chill' : 'fancy');
-  }
-</script>
-</body>
-</html>
+<figure class="specimen">
+<div class="tree-art"><img class="tree" src="assets/mango-tree.webp" width="1536" height="1024" fetchpriority="high" alt="A spreading mango tree with six ripe fruits. Each fruit links to a shelf in the notebook."><a class="fruit" href="garden/reading.html" style="--x:14.4%;--y:20.7%" aria-label="Reading shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Reading</span></a><a class="fruit" href="garden/writing.html" style="--x:42.2%;--y:42.8%" aria-label="Writing shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Writing</span></a><a class="fruit" href="garden/hinduism.html" style="--x:70.5%;--y:30.8%" aria-label="Hinduism shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Hinduism</span></a><a class="fruit" href="garden/work.html" style="--x:88.9%;--y:56.0%" aria-label="Work shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Work</span></a><a class="fruit" href="garden/roots.html" style="--x:17.1%;--y:59.5%" aria-label="Roots shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Roots</span></a><a class="fruit" href="garden/music.html" style="--x:73.6%;--y:74.4%" aria-label="Music shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Music</span></a></div>
+<figcaption><span class="caption-line"></span><span>Pick a mango to explore</span><span class="caption-line"></span></figcaption>
+</figure>
+</section>
+<div class="time-bar" hidden><span class="time-left"><span class="dial" aria-hidden="true"><i></i><b></b></span><time id="city-time"></time><span class="local">local time</span></span>
+<fieldset class="cities"><legend class="sr">Clock city</legend><button type="button" aria-pressed="true" data-zone="Asia/Kolkata">Delhi</button><button type="button" aria-pressed="false" data-zone="America/New_York">Philadelphia</button><button type="button" aria-pressed="false" data-zone="America/Los_Angeles">San Francisco</button></fieldset></div>
+<section class="shelf home-shelf"><div class="section-head"><h2>From the notebook</h2><a class="all" href="garden/index.html">Full index</a></div>
+<ul class="entries"><li><a class="entry" href="writing/stanford-essays.html"><span class="entry-meta">Dec 2022</span><span class="entry-title">College Essays I Never Got To Send In</span><span class="entry-branch"><i class="seed writing"></i>Writing</span></a></li><li><a class="entry" href="notes/first-mango.html"><span class="entry-meta">Poem</span><span class="entry-title">English Girl Eats Her First Mango</span><span class="entry-branch"><i class="seed reading"></i>Reading</span></a></li><li><a class="entry" href="notes/lucky-13.html"><span class="entry-meta">May 2026</span><span class="entry-title">Lucky #13</span><span class="entry-branch"><i class="seed writing"></i>Writing</span></a></li></ul></section>
+</main>
+<footer class="footer"><div class="footer-sign"><i></i>Saanvi Mehra</div><div class="foot-links"><a href="https://x.com/saanvimehra">X</a><a href="https://www.linkedin.com/in/saanvimehra/">LinkedIn</a><a href="https://github.com/saanvimehra">GitHub</a><button class="theme-control" id="theme" hidden>Night</button><button id="font" hidden>Serif reading</button></div></footer>
+</body></html>

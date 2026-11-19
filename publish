@@ -1,19 +1,14 @@
 #!/bin/bash
-# publish "your message"
-# Builds essays from markdown, then pushes to GitHub.
-
-MSG="${1:-update site}"
-
-echo ""
-echo "  → building essays..."
+set -eu
+cd "$(dirname "$0")"
+if [ "$(git branch --show-current)" != main ]; then
+  echo "Publish from the main branch of the website checkout." >&2
+  exit 1
+fi
 python3 build.py
-
-echo ""
-echo "  → pushing: \"$MSG\""
-git add .
-git commit -m "$MSG"
+git add -A -- essays notebook writing notes garden about connections index.html assets layout build.py publish README.md .gitignore
+if ! git diff --cached --quiet; then
+  git commit -m "${1:-Update the mango notebook}"
+fi
 git push origin main
-
-echo ""
-echo "  ✓ live at saanvimehra.com in ~30 seconds"
-echo ""
+echo "Pushed to GitHub Pages. Deployment status: https://github.com/saanvimehra/saanvimehra.github.io/actions"

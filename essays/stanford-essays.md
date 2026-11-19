@@ -1,6 +1,9 @@
 ---
-title: College Essays I Never Got To Send In
-date: 2022-12
+title: "College Essays I Never Got To Send In"
+slug: "stanford-essays"
+branch: "Writing"
+kind: "Essay"
+date: "2022-12"
 ---
 
 **The Stanford community is deeply curious and driven to learn in and out of the classroom. Reflect on an idea or experience that makes you genuinely excited about learning. (100 word min, 250 word max)**
