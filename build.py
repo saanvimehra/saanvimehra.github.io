@@ -329,7 +329,7 @@ def build(notes):
             continue
         n = notes[slug]
         fruit.append(f'<a class="hanging-fruit" id="pick-{slug}" href="{n.url}" data-stem="{stem}" '
-                     f'style="--x:{x}%;--y:{y}%"><img src="assets/fruit/{stem}.webp?v=2" alt="" width="88" height="104">'
+                     f'style="--x:{x}%;--y:{y}%"><img src="assets/fruit/{stem}.webp?v=3" alt="" width="88" height="104">'
                      f'<span class="fruit-label">{escape(n.title)}<small>{inline(cultivar, names)}</small></span></a>')
     credits = template('credits.html')
     wordmark = template('wordmark.html').strip()
