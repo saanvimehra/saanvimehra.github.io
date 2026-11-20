@@ -16,9 +16,9 @@ ROOT = Path(__file__).resolve().parent
 # Each cultivar has an attachment point in the ink drawing. The editor can
 # hang any published piece there without assigning it a subject.
 FRUIT = [
-    ('Alphonso', 'stanford-essays', 19.58333, 61.78571),
-    ('Langra', 'lucky-13', 16.38889, 46.78571),
-    ('Safeda', 'guthli', 84.72222, 32.32143),
+    ('alphonso', 'Alphonso/ *Hapus*', 'stanford-essays', 19.58333, 61.78571),
+    ('langra', 'Langra', 'lucky-13', 16.38889, 46.78571),
+    ('safeda', 'Safeda', 'guthli', 84.72222, 32.32143),
 ]
 COLLECTIONS = ('Found', 'Made')
 VERSE = ('I see my life extending before me', 'like a mango tree,',
@@ -324,14 +324,13 @@ def build(notes):
     names = link_map(notes)
     entries = sort_notes(n for n in notes.values() if n.slug != 'saanvi-mehra')
     fruit = []
-    for cultivar, slug, x, y in FRUIT:
+    for stem, cultivar, slug, x, y in FRUIT:
         if slug not in notes:
             continue
         n = notes[slug]
-        stem = cultivar.lower()
         fruit.append(f'<a class="hanging-fruit" id="pick-{slug}" href="{n.url}" data-stem="{stem}" '
-                     f'style="--x:{x}%;--y:{y}%"><img src="assets/fruit/{stem}.webp" alt="" width="88" height="104">'
-                     f'<span class="fruit-label">{escape(n.title)}<small>{cultivar}</small></span></a>')
+                     f'style="--x:{x}%;--y:{y}%"><img src="assets/fruit/{stem}.webp?v=2" alt="" width="88" height="104">'
+                     f'<span class="fruit-label">{escape(n.title)}<small>{inline(cultivar, names)}</small></span></a>')
     credits = template('credits.html')
     wordmark = template('wordmark.html').strip()
     home = template('home.html', wordmark=wordmark, outer_arc=VERSE[0], inner_arc=VERSE[1], verse_end=VERSE[2], author=BYLINE[0], adaptation=BYLINE[1],
