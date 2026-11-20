@@ -3,33 +3,122 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Saanvi Mehra · Under the mango tree</title>
-<meta name="description" content="Notes and essays from Saanvi Mehra’s mango tree.">
-<link rel="icon" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="assets/garden.css">
-<script src="assets/garden.js" defer></script>
+<title>Saanvi Mehra</title>
+<meta name="description" content="Saanvi Mehra’s writing and projects, under a mango tree.">
+<link rel="describedby" type="text/plain" href="llms.txt">
+<link rel="alternate" type="text/markdown" href="llms.txt" title="Read in Markdown">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=sm">
+<link rel="icon" type="image/svg+xml" sizes="any" href="assets/sm.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=sm">
+<meta property="og:title" content="Saanvi Mehra"><meta property="og:description" content="Saanvi Mehra’s writing and projects, under a mango tree.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://saanvimehra.com/">
+<meta property="og:image" content="https://saanvimehra.com/favicon.png?v=sm"><meta property="og:image:alt" content="sm. in Guthli">
+<meta name="twitter:card" content="summary">
+<link rel="preload" href="assets/Guthli-1.0.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/garden.css?v=peel-contour">
+<script src="assets/garden.js?v=inscription" defer></script>
+
 </head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="mast">
-<a class="brand" href="index.html"><img src="favicon-32.png" width="25" height="25" alt="">Saanvi Mehra</a>
-<nav aria-label="Main navigation"><a aria-current="page" href="index.html">Tree</a><a href="garden/index.html">Notebook</a><a href="connections/index.html">Connections</a><a href="about/index.html">About</a></nav>
-</header>
-<main id="main"><section class="hero" aria-labelledby="hero-title">
-<div class="opening">
-<figure class="epigraph"><blockquote>“taste this mango”</blockquote><figcaption><span></span><a href="notes/first-mango.html">John Agard</a></figcaption></figure>
-<h1 id="hero-title">Under the<br><em>mango tree.</em></h1>
-<p class="intro">I’m Saanvi. I grew up in Noida, build payment systems at Natural, and insist on the <em>u</em> in <em>colour</em>.</p>
-</div>
-<figure class="specimen">
-<div class="tree-art"><img class="tree" src="assets/mango-tree.webp" width="1536" height="1024" fetchpriority="high" alt="A spreading mango tree with six ripe fruits. Each fruit links to a shelf in the notebook."><a class="fruit" href="garden/reading.html" style="--x:14.4%;--y:20.7%" aria-label="Reading shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Reading</span></a><a class="fruit" href="garden/writing.html" style="--x:42.2%;--y:42.8%" aria-label="Writing shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Writing</span></a><a class="fruit" href="garden/hinduism.html" style="--x:70.5%;--y:30.8%" aria-label="Hinduism shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Hinduism</span></a><a class="fruit" href="garden/work.html" style="--x:88.9%;--y:56.0%" aria-label="Work shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Work</span></a><a class="fruit" href="garden/roots.html" style="--x:17.1%;--y:59.5%" aria-label="Roots shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Roots</span></a><a class="fruit" href="garden/music.html" style="--x:73.6%;--y:74.4%" aria-label="Music shelf"><span class="fruit-mark" aria-hidden="true">+</span><span class="fruit-label">Music</span></a></div>
-<figcaption><span class="caption-line"></span><span>Pick a mango to explore</span><span class="caption-line"></span></figcaption>
-</figure>
+<body class="tree-home">
+<a class="skip" href="#made">Skip to writing and projects</a>
+<main id="main"><section class="fruit-intro" aria-label="Enter Saanvi Mehra’s mango tree">
+  <div class="fruit-journey">
+    <canvas class="juice" aria-hidden="true"></canvas>
+    <a class="squeeze-fruit" id="squeeze" href="#tree" aria-label="Hold the mango to squeeze and enter the tree">
+      <span class="mango-portrait">
+        <svg class="fruit-inscription" viewBox="0 0 200 228" aria-hidden="true">
+          <defs>
+            <!-- Traced in photo coordinates. The inner curve hugs the left shoulder
+                 and clears the descenders at the crown. The outer offset is 30 units. -->
+            <path id="quote-outer" d="M-119.4,137.8 C-78.7,99.9 -47.9,85.2 -14.6,30.2 C-4.2,13.0 8.4,1.0 18.2,-6.8 C32.7,-18.4 48.0,-25.6 61.4,-29.9 C75.0,-34.3 88.5,-36.1 101.1,-37.1 C109.3,-37.7 118.2,-38.4 128.0,-38.4 C141.3,-38.4 153.6,-35.6 164.7,-31.7 C176.3,-27.7 190.0,-20.3 201.8,-8.8 C208.0,-2.8 214.3,4.9 219.9,14.1 C252.0,67.1 281.9,85.4 320.5,122.1"/>
+            <path id="quote-inner" d="M-98.9,159.8 C-61.3,124.8 -25.4,105.9 11.0,45.8 C19.4,31.9 28.1,23.8 36.2,17.2 C47.2,8.2 58.6,2.6 69.7,-1.1 C80.9,-4.8 92.3,-6.3 103.4,-7.2 C111.4,-7.8 119.6,-8.4 128.0,-8.3 C137.2,-8.3 146.1,-6.5 154.8,-3.4 C163.3,-0.4 172.3,4.4 180.9,12.7 C185.4,17.1 189.9,22.5 194.3,29.7 C229.1,87.2 263.5,109.3 299.9,143.8"/>
+          </defs>
+          <g class="mango-verse" text-anchor="middle"><text><textPath href="#quote-outer" startOffset="50%">I see my life extending before me</textPath></text> <text><textPath href="#quote-inner" startOffset="50%">like a mango tree,</textPath></text></g>
+        </svg>
+        <img src="assets/fruit/alphonso-portrait.webp" width="791" height="900" alt="Alphonso mango" fetchpriority="high" draggable="false">
+      </span>
+      <span class="squeeze-hint">Hold the mango to squeeze</span>
+    </a>
+    <div class="carton-stop" aria-hidden="true">
+      <div class="carton">
+        <img src="assets/fruit/frooti-125.webp" width="250" height="495" alt="" draggable="false">
+        <span class="carton-mouth"></span>
+      </div>
+      <blockquote class="carton-verse">
+        <p>and I plan to make the most Frooti out of it.</p>
+        <cite>- Sylvia Plath <span>(adapted by Saanvi Mehra)</span></cite>
+      </blockquote>
+    </div>
+  </div>
+  <span class="sr" role="status" id="mango-line"></span>
+  <a class="skip-pour" href="#tree" aria-label="Skip to the tree"><svg viewBox="0 0 32 24" aria-hidden="true" focusable="false"><path d="M3 12h25m-9-8 9 8-9 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </section>
-<div class="time-bar" hidden><span class="time-left"><span class="dial" aria-hidden="true"><i></i><b></b></span><time id="city-time"></time><span class="local">local time</span></span>
-<fieldset class="cities"><legend class="sr">Clock city</legend><button type="button" aria-pressed="true" data-zone="Asia/Kolkata">Delhi</button><button type="button" aria-pressed="false" data-zone="America/New_York">Philadelphia</button><button type="button" aria-pressed="false" data-zone="America/Los_Angeles">San Francisco</button></fieldset></div>
-<section class="shelf home-shelf"><div class="section-head"><h2>From the notebook</h2><a class="all" href="garden/index.html">Full index</a></div>
-<ul class="entries"><li><a class="entry" href="writing/stanford-essays.html"><span class="entry-meta">Dec 2022</span><span class="entry-title">College Essays I Never Got To Send In</span><span class="entry-branch"><i class="seed writing"></i>Writing</span></a></li><li><a class="entry" href="notes/first-mango.html"><span class="entry-meta">Poem</span><span class="entry-title">English Girl Eats Her First Mango</span><span class="entry-branch"><i class="seed reading"></i>Reading</span></a></li><li><a class="entry" href="notes/lucky-13.html"><span class="entry-meta">May 2026</span><span class="entry-title">Lucky #13</span><span class="entry-branch"><i class="seed writing"></i>Writing</span></a></li></ul></section>
+<div class="inside-garden">
+  <section id="tree" class="orchard-room" aria-label="Explore the mango tree" tabindex="-1">
+    <div class="orchard-desk">
+      <div class="orchard-welcome">
+        <h1><span class="wordmark">Saanv<span class="name-i">i<span class="i-origin" aria-hidden="true"><svg viewBox="0 0 427 1558" focusable="false"><g transform="translate(0 1558) scale(1 -1)"><path d="M28 3Q40 24 81 29Q122 33 122 94V978Q122 1039 96 1043Q71 1048 58 1069L399 1072Q387 1048 346 1043Q305 1039 305 978V94Q305 33 331 29Q356 24 369 0Z"/><path class="mango-dot" d="M309 1558Q348 1447 277 1349Q231 1287 160 1317Q78 1355 121 1452Q150 1520 309 1558Z"/></g></svg></span></span> Mehra</span></h1>
+      </div>
+    </div>
+    <figure class="tree-explorer">
+      <div class="canopy" role="group" aria-label="Pick a mango to explore a piece">
+        <img class="vine-still" src="assets/vine-sketch.png" width="720" height="560" alt="">
+        <canvas class="vine-drawing" aria-hidden="true" hidden></canvas>
+        <a class="hanging-fruit" id="pick-stanford-essays" href="writing/stanford-essays.html" data-stem="alphonso" style="--x:19.58333%;--y:61.78571%"><img src="assets/fruit/alphonso.webp" alt="" width="88" height="104"><span class="fruit-label">College Essays I Never Got To Send In<small>Alphonso</small></span></a><a class="hanging-fruit" id="pick-lucky-13" href="notes/lucky-13.html" data-stem="langra" style="--x:16.38889%;--y:46.78571%"><img src="assets/fruit/langra.webp" alt="" width="88" height="104"><span class="fruit-label">Lucky #13<small>Langra</small></span></a><a class="hanging-fruit" id="pick-guthli" href="notes/guthli.html" data-stem="safeda" style="--x:84.72222%;--y:32.32143%"><img src="assets/fruit/safeda.webp" alt="" width="88" height="104"><span class="fruit-label">Guthli<small>Safeda</small></span></a>
+      </div>
+    </figure>
+  </section>
+  <section id="about-me" class="home-bio" aria-labelledby="bio-title" tabindex="-1">
+    <h2 id="bio-title">About me</h2>
+    <div class="prose original-bio"><ul class="bio-list" role="list"><li><details class="bio-fold"><summary title="Expand or collapse this paragraph"><svg class="bio-venn" viewBox="0 0 38 28" aria-hidden="true" focusable="false">
+  <path class="venn-complement" fill-rule="evenodd" d="M4 14a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z M14 14a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z"/>
+  <path class="venn-overlap" d="M19 5.34a10 10 0 0 1 0 17.32a10 10 0 0 1 0 -17.32Z"/>
+  <g fill="none" stroke="currentColor" stroke-width="1.35">
+    <circle cx="14" cy="14" r="10"/><circle cx="24" cy="14" r="10"/>
+  </g>
+</svg>
+<span class="sr">Studying at Penn</span></summary><div class="bio-full"><p>I&#x27;m a student in the M&amp;T program at Penn, where I study finance @ Wharton and CS Eng @ Penn Engineering. Set Theory was one of the first mathematical concepts I was exposed to. I realised pretty early on that I love intersection sets. As a result, I&#x27;ve always sought problems that simulates multiple dimensions of who I am, sitting across agentic payments, stablecoin research, credit scoring, insurance infrastructure in India, and sensitivity optimization in multimodal ML and computer vision systems.</p></div></details><div class="bio-brief"><p>I&#x27;m a student in the M&amp;T program at Penn where I study finance and computer science. I&#x27;m interested in figuring out the intersections sets that exist in the world.</p></div></li><li><details class="bio-fold"><summary title="Expand or collapse this paragraph"><svg class="bio-venn" viewBox="0 0 38 28" aria-hidden="true" focusable="false">
+  <path class="venn-complement" fill-rule="evenodd" d="M4 14a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z M14 14a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z"/>
+  <path class="venn-overlap" d="M19 5.34a10 10 0 0 1 0 17.32a10 10 0 0 1 0 -17.32Z"/>
+  <g fill="none" stroke="currentColor" stroke-width="1.35">
+    <circle cx="14" cy="14" r="10"/><circle cx="24" cy="14" r="10"/>
+  </g>
+</svg>
+<span class="sr">Working in payments</span></summary><div class="bio-full"><p>I&#x27;m currently working at <a href="https://www.natural.com/">Natural</a> as an Engineer. In the past, I built <a href="https://www.orbete.com">Orbete</a>, a credit layer based on stablecoin transaction behavior, and worked at Stripe to better understand how payments reach meaningful scale. I&#x27;ve also spent time with Blockchain Capital, Bullish, Zopper, Penn Blockchain, the Wharton Innovation Fund, and Wharton&#x27;s Stevens Center Fintech Fellowship.</p></div></details><div class="bio-brief"><p>I&#x27;m currently working at <a href="https://www.natural.com/">Natural</a> as an Engineer. In the past, I built <a href="https://www.orbete.com/">Orbete</a>, and worked at Stripe, Blockchain Capital, Bullish, and Zopper.</p></div></li><li><details class="bio-fold"><summary title="Expand or collapse this paragraph"><svg class="bio-venn" viewBox="0 0 38 28" aria-hidden="true" focusable="false">
+  <path class="venn-complement" fill-rule="evenodd" d="M4 14a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z M14 14a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z"/>
+  <path class="venn-overlap" d="M19 5.34a10 10 0 0 1 0 17.32a10 10 0 0 1 0 -17.32Z"/>
+  <g fill="none" stroke="currentColor" stroke-width="1.35">
+    <circle cx="14" cy="14" r="10"/><circle cx="24" cy="14" r="10"/>
+  </g>
+</svg>
+<span class="sr">Growing up in Noida</span></summary><div class="bio-full"><p>I grew up in Noida, a suburb of Delhi, India, with a strong sense of <span class="gloss"><a class="gloss-link" href="https://en.wikipedia.org/wiki/Dharma" title="Dharma — In Hinduism, dharma signifies behaviours considered to be in accord with the order that makes life and the universe possible — duty, law, ethics, and right action.">धर्म</a><span class="gloss-card" id="gloss-dharma-full-4" role="group" aria-label="Dharma" hidden><span class="gloss-heading"><span class="gloss-script" lang="sa">धर्म</span><strong>Dharma</strong></span><span class="gloss-definition">In Hinduism, dharma signifies behaviours considered to be in accord with the order that makes life and the universe possible — duty, law, ethics, and right action.</span><a href="https://en.wikipedia.org/wiki/Dharma">Read more about Dharma ↗</a></span></span> and <span class="gloss"><a class="gloss-link" href="https://en.wikipedia.org/wiki/Karma" title="Karma — In Indian religions, karma is the concept of action, work, or deed and its effect on the future of an individual — the spiritual principle of cause and effect.">कर्म</a><span class="gloss-card" id="gloss-karma-full-4" role="group" aria-label="Karma" hidden><span class="gloss-heading"><span class="gloss-script" lang="sa">कर्म</span><strong>Karma</strong></span><span class="gloss-definition">In Indian religions, karma is the concept of action, work, or deed and its effect on the future of an individual — the spiritual principle of cause and effect.</span><a href="https://en.wikipedia.org/wiki/Karma">Read more about Karma ↗</a></span></span> shaped by my parents, the two most principled and hardworking people I know. I have a sister 6 years younger than me, who has taught me more about humanity than everything, everyone else, combined. <span class="favourite-green">My favourite colour is green.</span> I use British English because I studied in the particularly colonially influenced ICSE board. It has caused more bugs than I&#x27;d liked to admit because of my insistence on seeing the letters <em>our</em> together.</p></div></details><div class="bio-brief"><p>I grew up in Noida with a strong sense of <span class="gloss"><a class="gloss-link" href="https://en.wikipedia.org/wiki/Dharma" title="Dharma — In Hinduism, dharma signifies behaviours considered to be in accord with the order that makes life and the universe possible — duty, law, ethics, and right action.">धर्म</a><span class="gloss-card" id="gloss-dharma-brief-4" role="group" aria-label="Dharma" hidden><span class="gloss-heading"><span class="gloss-script" lang="sa">धर्म</span><strong>Dharma</strong></span><span class="gloss-definition">In Hinduism, dharma signifies behaviours considered to be in accord with the order that makes life and the universe possible — duty, law, ethics, and right action.</span><a href="https://en.wikipedia.org/wiki/Dharma">Read more about Dharma ↗</a></span></span> and <span class="gloss"><a class="gloss-link" href="https://en.wikipedia.org/wiki/Karma" title="Karma — In Indian religions, karma is the concept of action, work, or deed and its effect on the future of an individual — the spiritual principle of cause and effect.">कर्म</a><span class="gloss-card" id="gloss-karma-brief-4" role="group" aria-label="Karma" hidden><span class="gloss-heading"><span class="gloss-script" lang="sa">कर्म</span><strong>Karma</strong></span><span class="gloss-definition">In Indian religions, karma is the concept of action, work, or deed and its effect on the future of an individual — the spiritual principle of cause and effect.</span><a href="https://en.wikipedia.org/wiki/Karma">Read more about Karma ↗</a></span></span> shaped by my parents and little sister. <span class="favourite-green">My favourite colour is green.</span></p></div></li><li><details class="bio-fold"><summary title="Expand or collapse this paragraph"><svg class="bio-venn" viewBox="0 0 38 28" aria-hidden="true" focusable="false">
+  <path class="venn-complement" fill-rule="evenodd" d="M4 14a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z M14 14a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z"/>
+  <path class="venn-overlap" d="M19 5.34a10 10 0 0 1 0 17.32a10 10 0 0 1 0 -17.32Z"/>
+  <g fill="none" stroke="currentColor" stroke-width="1.35">
+    <circle cx="14" cy="14" r="10"/><circle cx="24" cy="14" r="10"/>
+  </g>
+</svg>
+<span class="sr">Spirituality and consciousness</span></summary><div class="bio-full"><p>I&#x27;m drawn to spirituality, Hinduism, and consciousness (which is oddly in line with both the <a href="https://open.spotify.com/playlist/2CtuTKnN1cK7LrX2Y8d1EP?si=6d9834631d1142b0">70s California</a> tech bro I aspire to be and the <span class="gloss"><a class="gloss-link" href="https://en.wikipedia.org/wiki/Advaita_Vedanta" title="Advaita Vedanta — A Hindu non-dual philosophy meaning &quot;not two&quot;. It teaches that the individual soul (Atman) and the ultimate absolute reality (Brahman) are identical.">Advaita Vedantic</a><span class="gloss-card" id="gloss-advaita-vedanta-full-6" role="group" aria-label="Advaita Vedanta" hidden><span class="gloss-heading"><strong>Advaita Vedanta</strong></span><span class="gloss-definition">A Hindu non-dual philosophy meaning &quot;not two&quot;. It teaches that the individual soul (Atman) and the ultimate absolute reality (Brahman) are identical.</span><a href="https://en.wikipedia.org/wiki/Advaita_Vedanta">Read more about Advaita Vedanta ↗</a></span></span> monkdom that I hope finds me one day). I&#x27;ve tried reading and translating Vedic scriptures on my own, in addition to the nihilistic, stoic western philosophy college kids are expected to resort to in times of desperation. All of it and none of it makes sense. I try to be intentional, but am very aware of the futility of it, so I just take joy in the beauty of it all: <a href="https://instagram.com/saanvitimehra">@saanvitimehra</a></p></div></details><div class="bio-brief"><p>I&#x27;m drawn to spirituality, Hinduism, and consciousness (which is oddly in line with both the <a href="https://open.spotify.com/playlist/2CtuTKnN1cK7LrX2Y8d1EP?si=6d9834631d1142b0">70s California</a> tech bro I aspire to be and the <span class="gloss"><a class="gloss-link" href="https://en.wikipedia.org/wiki/Advaita_Vedanta" title="Advaita Vedanta — A Hindu non-dual philosophy meaning &quot;not two&quot;. It teaches that the individual soul (Atman) and the ultimate absolute reality (Brahman) are identical.">Advaita Vedantic</a><span class="gloss-card" id="gloss-advaita-vedanta-brief-6" role="group" aria-label="Advaita Vedanta" hidden><span class="gloss-heading"><strong>Advaita Vedanta</strong></span><span class="gloss-definition">A Hindu non-dual philosophy meaning &quot;not two&quot;. It teaches that the individual soul (Atman) and the ultimate absolute reality (Brahman) are identical.</span><a href="https://en.wikipedia.org/wiki/Advaita_Vedanta">Read more about Advaita Vedanta ↗</a></span></span> monkdom that I hope finds me one day).</p></div></li></ul></div>
+  </section>
+  <section class="home-section" id="made"><h2>Made</h2><ul class="entry-list" role="list"><li><a class="entry-link" data-slug="guthli" href="notes/guthli.html"><span class="entry-title">Guthli</span> <span class="entry-meta">Nov 2026</span></a></li><li><a class="entry-link" data-slug="lucky-13" href="notes/lucky-13.html"><span class="entry-title">Lucky #13</span> <span class="entry-meta">May 2026</span></a></li><li><a class="entry-link" data-slug="stanford-essays" href="writing/stanford-essays.html"><span class="entry-title">College Essays I Never Got To Send In</span> <span class="entry-meta">Dec 2022</span></a></li></ul></section>
+  <section class="home-section" id="found"><h2>Found</h2><p class="coming-soon">Coming soon.</p></section>
+</div>
+<script src="assets/vine.js?v=foliage" defer></script>
+<script src="assets/orchard.js?v=shorter-hold" defer></script>
 </main>
-<footer class="footer"><div class="footer-sign"><i></i>Saanvi Mehra</div><div class="foot-links"><a href="https://x.com/saanvimehra">X</a><a href="https://www.linkedin.com/in/saanvimehra/">LinkedIn</a><a href="https://github.com/saanvimehra">GitHub</a><button class="theme-control" id="theme" hidden>Night</button><button id="font" hidden>Serif reading</button></div></footer>
+<footer class="footer">
+  <div class="footer-name"><a class="signature" href="index.html"><span class="wordmark">Saanv<span class="name-i">i<span class="i-origin" aria-hidden="true"><svg viewBox="0 0 427 1558" focusable="false"><g transform="translate(0 1558) scale(1 -1)"><path d="M28 3Q40 24 81 29Q122 33 122 94V978Q122 1039 96 1043Q71 1048 58 1069L399 1072Q387 1048 346 1043Q305 1039 305 978V94Q305 33 331 29Q356 24 369 0Z"/><path class="mango-dot" d="M309 1558Q348 1447 277 1349Q231 1287 160 1317Q78 1355 121 1452Q150 1520 309 1558Z"/></g></svg></span></span> Mehra</span></a><details class="credits" id="credits"><summary>Credits</summary>
+<div class="credit-card">
+<p>Mango photographs, cropped for the tree</p>
+<ul>
+<li>Salil Kumar Mukherjee photographed the <a href="https://commons.wikimedia.org/wiki/File:%27Banganapalle%27_mango.jpg">Safeda (Banganapalle)</a>, <a href="https://commons.wikimedia.org/wiki/File:%27Chaunsa%27_mango.jpg">Chausa</a>, <a href="https://commons.wikimedia.org/wiki/File:%27Dasheri%27_mango.jpg">Dasheri</a>, and <a href="https://commons.wikimedia.org/wiki/File:A_%27Langra%27_mango.jpg">Langra</a> in Kolkata. <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li>
+<li><a href="https://commons.wikimedia.org/wiki/File:Mango_Kesar_Indian_variety_IMG_20230603_114021_(2).jpg">Kesar at a Mumbai market</a> by Dr. Raju Kasambe. <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li>
+<li><a href="https://commons.wikimedia.org/wiki/File:SH-Mango.jpg">Alphonso</a> by Sandeepsh16. <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li>
+<li>The <a href="https://www.bigbasket.com/pd/274035/frooti-drink-fresh-n-juicy-mango-150-ml-tetra/">125 mL Frooti carton</a> is from BigBasket’s product photographs.</li>
+</ul>
+<p>The leaves are from a stereo recording of branches shaken outdoors in Pretoria. <a href="https://freesound.org/people/DDT197/sounds/445788/">Rustling foliage by DDT197</a> · <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></p>
+</div></details>
+</div>
+  <nav class="foot-links" aria-label="Footer"><a href="https://github.com/saanvimehra">GitHub</a><a href="https://www.linkedin.com/in/saanvimehra/">LinkedIn</a><a href="https://x.com/saanvimehra">X</a><a href="https://instagram.com/saanvitimehra">Instagram</a><a href="llms.txt" type="text/plain">For agents</a></nav>
+</footer>
 </body></html>

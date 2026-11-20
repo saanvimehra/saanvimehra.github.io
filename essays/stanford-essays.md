@@ -1,8 +1,9 @@
 ---
 title: "College Essays I Never Got To Send In"
 slug: "stanford-essays"
-branch: "Writing"
 kind: "Essay"
+collection: "Made"
+glimpse: "What do you think of cilantro?"
 date: "2022-12"
 ---
 

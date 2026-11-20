@@ -1,15 +1,56 @@
-<section class="hero" aria-labelledby="hero-title">
-<div class="opening">
-<figure class="epigraph"><blockquote>“taste this mango”</blockquote><figcaption><span></span><a href="notes/first-mango.html">John Agard</a></figcaption></figure>
-<h1 id="hero-title">Under the<br><em>mango tree.</em></h1>
-<p class="intro">I’m Saanvi. I grew up in Noida, build payment systems at Natural, and insist on the <em>u</em> in <em>colour</em>.</p>
-</div>
-<figure class="specimen">
-<div class="tree-art"><img class="tree" src="assets/mango-tree.webp" width="1536" height="1024" fetchpriority="high" alt="A spreading mango tree with six ripe fruits. Each fruit links to a shelf in the notebook.">$fruit</div>
-<figcaption><span class="caption-line"></span><span>Pick a mango to explore</span><span class="caption-line"></span></figcaption>
-</figure>
+<section class="fruit-intro" aria-label="Enter Saanvi Mehra’s mango tree">
+  <div class="fruit-journey">
+    <canvas class="juice" aria-hidden="true"></canvas>
+    <a class="squeeze-fruit" id="squeeze" href="#tree" aria-label="Hold the mango to squeeze and enter the tree">
+      <span class="mango-portrait">
+        <svg class="fruit-inscription" viewBox="0 0 200 228" aria-hidden="true">
+          <defs>
+            <!-- Traced in photo coordinates. The inner curve hugs the left shoulder
+                 and clears the descenders at the crown. The outer offset is 30 units. -->
+            <path id="quote-outer" d="M-119.4,137.8 C-78.7,99.9 -47.9,85.2 -14.6,30.2 C-4.2,13.0 8.4,1.0 18.2,-6.8 C32.7,-18.4 48.0,-25.6 61.4,-29.9 C75.0,-34.3 88.5,-36.1 101.1,-37.1 C109.3,-37.7 118.2,-38.4 128.0,-38.4 C141.3,-38.4 153.6,-35.6 164.7,-31.7 C176.3,-27.7 190.0,-20.3 201.8,-8.8 C208.0,-2.8 214.3,4.9 219.9,14.1 C252.0,67.1 281.9,85.4 320.5,122.1"/>
+            <path id="quote-inner" d="M-98.9,159.8 C-61.3,124.8 -25.4,105.9 11.0,45.8 C19.4,31.9 28.1,23.8 36.2,17.2 C47.2,8.2 58.6,2.6 69.7,-1.1 C80.9,-4.8 92.3,-6.3 103.4,-7.2 C111.4,-7.8 119.6,-8.4 128.0,-8.3 C137.2,-8.3 146.1,-6.5 154.8,-3.4 C163.3,-0.4 172.3,4.4 180.9,12.7 C185.4,17.1 189.9,22.5 194.3,29.7 C229.1,87.2 263.5,109.3 299.9,143.8"/>
+          </defs>
+          <g class="mango-verse" text-anchor="middle"><text><textPath href="#quote-outer" startOffset="50%">$outer_arc</textPath></text> <text><textPath href="#quote-inner" startOffset="50%">$inner_arc</textPath></text></g>
+        </svg>
+        <img src="assets/fruit/alphonso-portrait.webp" width="791" height="900" alt="Alphonso mango" fetchpriority="high" draggable="false">
+      </span>
+      <span class="squeeze-hint">Hold the mango to squeeze</span>
+    </a>
+    <div class="carton-stop" aria-hidden="true">
+      <div class="carton">
+        <img src="assets/fruit/frooti-125.webp" width="250" height="495" alt="" draggable="false">
+        <span class="carton-mouth"></span>
+      </div>
+      <blockquote class="carton-verse">
+        <p>$verse_end</p>
+        <cite>$author <span>$adaptation</span></cite>
+      </blockquote>
+    </div>
+  </div>
+  <span class="sr" role="status" id="mango-line"></span>
+  <a class="skip-pour" href="#tree" aria-label="Skip to the tree"><svg viewBox="0 0 32 24" aria-hidden="true" focusable="false"><path d="M3 12h25m-9-8 9 8-9 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </section>
-<div class="time-bar" hidden><span class="time-left"><span class="dial" aria-hidden="true"><i></i><b></b></span><time id="city-time"></time><span class="local">local time</span></span>
-<fieldset class="cities"><legend class="sr">Clock city</legend>$cities</fieldset></div>
-<section class="shelf home-shelf"><div class="section-head"><h2>From the notebook</h2><a class="all" href="garden/index.html">Full index</a></div>
-$rows</section>
+<div class="inside-garden">
+  <section id="tree" class="orchard-room" aria-label="Explore the mango tree" tabindex="-1">
+    <div class="orchard-desk">
+      <div class="orchard-welcome">
+        <h1>$wordmark</h1>
+      </div>
+    </div>
+    <figure class="tree-explorer">
+      <div class="canopy" role="group" aria-label="Pick a mango to explore a piece">
+        <img class="vine-still" src="assets/vine-sketch.png" width="720" height="560" alt="">
+        <canvas class="vine-drawing" aria-hidden="true" hidden></canvas>
+        $fruit
+      </div>
+    </figure>
+  </section>
+  <section id="about-me" class="home-bio" aria-labelledby="bio-title" tabindex="-1">
+    <h2 id="bio-title">About me</h2>
+    <div class="prose original-bio">$profile</div>
+  </section>
+  <section class="home-section" id="made"><h2>Made</h2>$made</section>
+  <section class="home-section" id="found"><h2>Found</h2>$found</section>
+</div>
+<script src="assets/vine.js?v=foliage" defer></script>
+<script src="assets/orchard.js?v=shorter-hold" defer></script>

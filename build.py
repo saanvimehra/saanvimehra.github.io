@@ -5,7 +5,7 @@ import calendar
 import json
 import re
 import subprocess
-from collections import defaultdict
+import unicodedata
 from dataclasses import dataclass
 from html import escape
 from pathlib import Path
@@ -13,14 +13,17 @@ from string import Template
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent
-BRANCHES = {
-    "Reading": ("Books, poems, and passages.", 14.4, 20.7),
-    "Writing": ("Essays and letters.", 42.2, 42.8),
-    "Hinduism": ("Scripture, practice, and consciousness.", 70.5, 30.8),
-    "Work": ("Payments, code, and intersection sets.", 88.9, 56.0),
-    "Roots": ("Noida, family, and the things that stick.", 17.1, 59.5),
-    "Music": ("Things to listen to.", 73.6, 74.4),
-}
+# Each cultivar has an attachment point in the ink drawing. The editor can
+# hang any published piece there without assigning it a subject.
+FRUIT = [
+    ('Alphonso', 'stanford-essays', 19.58333, 61.78571),
+    ('Langra', 'lucky-13', 16.38889, 46.78571),
+    ('Safeda', 'guthli', 84.72222, 32.32143),
+]
+COLLECTIONS = ('Found', 'Made')
+VERSE = ('I see my life extending before me', 'like a mango tree,',
+         'and I plan to make the most Frooti out of it.')
+BYLINE = ('- Sylvia Plath', '(adapted by Saanvi Mehra)')
 WIKI = re.compile(r'\[\[([^\]\n]+)\]\]')
 INLINE = re.compile(r'\[\[[^\]\n]+\]\]|\[[^\]\n]+\]\([^\s)]+\)|\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`')
 GENERATED = '<!-- Built by the mango notebook. -->'
@@ -31,15 +34,27 @@ SLUG = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*')
 class Note:
     slug: str
     title: str
-    branch: str
     kind: str
     date: str
     body: str
     source: str
     filename: str
+    collections: tuple
+    glimpse: str
+
+    @property
+    def passages(self):
+        """Separate an optional closing list of authored connections from the text."""
+        return re.split(r'^## Connections[ \t]*$', self.body, maxsplit=1, flags=re.M)
 
     @property
     def url(self):
+        return 'index.html#about-me' if self.slug == 'saanvi-mehra' else self.source_page
+
+    @property
+    def source_page(self):
+        if self.slug == 'saanvi-mehra':
+            return 'about/index.html'
         return ('writing/' if self.source == 'essays' else 'notes/') + self.slug + '.html'
 
     @property
@@ -86,12 +101,11 @@ def read_notes(vault=None):
             continue
         slug = meta.get('slug', path.stem)
         source = ('essays' if slug == 'stanford-essays' else 'notebook') if vault else path.parent.name
-        branch = meta.get('branch', 'Writing' if source == 'essays' else '')
         title = meta.get('title', path.stem)
-        kind = meta.get('kind', 'Essay' if branch == 'Writing' else 'Note')
+        kind = meta.get('kind', 'Essay' if source == 'essays' else 'Note')
         date = meta.get('date', '')
-        if not SLUG.fullmatch(slug) or branch not in BRANCHES or slug in result:
-            raise ValueError(f'{path.name}: use a unique lowercase hyphenated slug and a listed branch.')
+        if not SLUG.fullmatch(slug) or slug in result:
+            raise ValueError(f'{path.name}: use a unique lowercase hyphenated slug.')
         if date and not re.fullmatch(r'\d{4}-(0[1-9]|1[0-2])(-\d{2})?', date):
             raise ValueError(f'{path.name}: use YYYY-MM or YYYY-MM-DD for the date.')
         # Obsidian comments are author-only, even inside a published note.
@@ -99,7 +113,11 @@ def read_notes(vault=None):
             raise ValueError(f'{path.name}: close the %% comment before publishing.')
         body = re.sub(r'%%.*?%%', '', body, flags=re.S).strip()
         filename = path.stem if vault else meta.get('filename', path.stem)
-        result[slug] = Note(slug, title, branch, kind, date, body, source, filename)
+        legacy = {'Upstream': 'Found', 'Commits': 'Made'}.get(meta.get('stream'), '')
+        collections = tuple(s.strip() for s in meta.get('collection', legacy).split(',') if s.strip())
+        if set(collections).difference(COLLECTIONS):
+            raise ValueError(f'{path.name}: collection accepts Found, Made, or both separated by a comma.')
+        result[slug] = Note(slug, title, kind, date, body, source, filename, collections, meta.get('glimpse', ''))
     return result
 
 
@@ -118,7 +136,7 @@ def wiki_parts(value):
     return target.strip(), alias.strip() or target.strip()
 
 
-def inline(line, names, prefix='../'):
+def inline(line, names, root=''):
     parts = []
     end = 0
     for match in INLINE.finditer(line):
@@ -128,7 +146,7 @@ def inline(line, names, prefix='../'):
             key, label = wiki_parts(tok[2:-2])
             if key.casefold() not in names:
                 raise ValueError(f'Link to unpublished or missing note: [[{key}]]. Remove the link or publish its target.')
-            parts.append(f'<a href="{prefix}{names[key.casefold()].url}">{escape(label)}</a>')
+            parts.append(f'<a href="{root}{names[key.casefold()].url}">{escape(label)}</a>')
         elif tok.startswith('['):
             label, url = tok[1:-1].split('](', 1)
             if urlsplit(url).scheme not in ('https', 'http', 'mailto'):
@@ -143,7 +161,7 @@ def inline(line, names, prefix='../'):
     return ''.join(parts) + escape(line[end:])
 
 
-def markdown(body, names):
+def markdown(body, names, root=''):
     blocks = []
     for block in re.split(r'\n\s*\n', body.strip()):
         lines = block.splitlines()
@@ -152,19 +170,19 @@ def markdown(body, names):
         if block == '---':
             blocks.append('<hr>')
         elif block.startswith('> '):
-            blocks.append('<blockquote>' + inline('\n'.join(l.removeprefix('> ') for l in lines), names) + '</blockquote>')
+            blocks.append('<blockquote>' + inline('\n'.join(l.removeprefix('> ') for l in lines), names, root) + '</blockquote>')
         elif all(l.startswith(('- ', '* ')) for l in lines):
-            blocks.append('<ul>' + ''.join('<li>' + inline(l[2:], names) + '</li>' for l in lines) + '</ul>')
+            blocks.append('<ul>' + ''.join('<li>' + inline(l[2:], names, root) + '</li>' for l in lines) + '</ul>')
         elif block.startswith('#'):
             heading = re.match(r'^#{1,6} (.+)$', lines[0])
             if heading:
-                blocks.append(f'<h2>{inline(heading[1], names)}</h2>')
+                blocks.append(f'<h2>{inline(heading[1], names, root)}</h2>')
                 if len(lines) > 1:
-                    blocks.append('<p>' + inline('\n'.join(lines[1:]), names) + '</p>')
+                    blocks.append('<p>' + inline('\n'.join(lines[1:]), names, root) + '</p>')
             else:
-                blocks.append('<p>' + inline(block, names) + '</p>')
+                blocks.append('<p>' + inline(block, names, root) + '</p>')
         else:
-            blocks.append('<p>' + '<br>'.join(inline(l, names) for l in lines) + '</p>')
+            blocks.append('<p>' + '<br>'.join(inline(l, names, root) for l in lines) + '</p>')
     return '\n'.join(blocks)
 
 
@@ -172,112 +190,219 @@ def template(name, **values):
     return Template((ROOT / 'layout' / name).read_text()).substitute(values)
 
 
-def page(title, section, content, root='../', description='Notes and essays from Saanvi Mehra’s mango tree.'):
-    paths = [('Tree', 'index.html'), ('Notebook', 'garden/index.html'),
-             ('Connections', 'connections/index.html'), ('About', 'about/index.html')]
-    links = []
-    for label, path in paths:
-        current = ' aria-current="page"' if section == label else ''
-        links.append(f'<a{current} href="{root}{path}">{label}</a>')
-    html = template('shell.html', title=escape(title), description=escape(description), root=root,
-                    nav=''.join(links), main=content)
-    return html.replace('<html', GENERATED + '\n<html', 1)
-
-
-def note_link(note, root='../'):
-    return f'<a href="{root}{note.url}">{escape(note.title)}</a>'
-
-
-def rows(notes, root='../'):
-    items = []
-    for n in notes:
-        meta = n.date_label or n.kind
-        items.append(f'<li><a class="entry" href="{root}{n.url}"><span class="entry-meta">{escape(meta)}</span>'
-                     f'<span class="entry-title">{escape(n.title)}</span><span class="entry-branch">'
-                     f'<i class="seed {n.branch.lower()}"></i>{n.branch}</span></a></li>')
-    return '<ul class="entries">' + ''.join(items) + '</ul>'
+def character_sheet(*, afterword):
+    groups = {key: [] for key in ('Uppercase', 'Lowercase', 'Numbers', 'Extended Latin',
+                                  'Punctuation and symbols', 'Combining marks', 'Spaces and controls')}
+    for span in (ROOT / 'layout/guthli-codepoints.txt').read_text().split():
+        low, _, high = span.partition('-')
+        for code in range(int(low, 16), int(high or low, 16) + 1):
+            char = chr(code)
+            name = unicodedata.name(char)
+            category = unicodedata.category(char)[0]
+            if 'A' <= char <= 'Z':
+                group = 'Uppercase'
+            elif 'a' <= char <= 'z':
+                group = 'Lowercase'
+            elif category == 'N':
+                group = 'Numbers'
+            elif name.startswith('LATIN '):
+                group = 'Extended Latin'
+            elif category == 'M':
+                group = 'Combining marks'
+            elif category in ('C', 'Z'):
+                group = 'Spaces and controls'
+            else:
+                group = 'Punctuation and symbols'
+            label = escape(name.lower())
+            if group == 'Spaces and controls':
+                sample = f'<span class="space-name">{label}</span>'
+            else:
+                sample = f'<span class="drawn-char">{escape(("x" if category == "M" else "") + char)}</span>'
+            groups[group].append(f'<li data-code="{code:04X}" title="{label} · U+{code:04X}" '
+                                 f'aria-label="{label}, U+{code:04X}">{sample}<small>U+{code:04X}</small></li>')
+    sections = []
+    for title, cells in groups.items():
+        hint = '<p>Each mark is shown on x.</p>' if title == 'Combining marks' else ''
+        css = 'char-grid spaces' if title == 'Spaces and controls' else 'char-grid'
+        section_id = title.lower().replace(' ', '-')
+        sections.append(f'<section id="{section_id}"><h2>{title} <small>{len(cells)}</small></h2>{hint}'
+                        f'<ul class="{css}">' + ''.join(cells) + '</ul></section>')
+    return template('characters.html', afterword=afterword,
+                    count=sum(map(len, groups.values())), sections=''.join(sections))
 
 
 def sort_notes(notes):
     return sorted(sorted(notes, key=lambda n: n.title.casefold()), key=lambda n: n.date, reverse=True)
 
 
+def profile_html(note, names):
+    if not note:
+        return ''
+    # Each titled section starts with the short reading, followed by the full passage.
+    preface, *sections = re.split(r'^### (.+)$', note.passages[0], flags=re.M)
+    items = []
+    venn = template('venn.html')
+    for paragraph in re.split(r'\n\s*\n', preface.strip()):
+        if paragraph:
+            items.append('<li>' + profile_copy(paragraph, names, f'intro-{len(items)}') + '</li>')
+    for index in range(0, len(sections), 2):
+        label, body = sections[index:index + 2]
+        readings = re.split(r'\n\s*\n', body.strip(), maxsplit=1)
+        brief = profile_copy(readings[0], names, f'brief-{index}')
+        if len(readings) == 1:
+            items.append(f'<li>{brief}</li>')
+            continue
+        full = profile_copy(readings[1], names, f'full-{index}')
+        items.append(f'<li><details class="bio-fold"><summary title="Expand or collapse this paragraph">'
+                     f'{venn}<span class="sr">{escape(label)}</span>'
+                     f'</summary><div class="bio-full">{full}</div></details>'
+                     f'<div class="bio-brief">{brief}</div></li>')
+    return '<ul class="bio-list" role="list">' + ''.join(items) + '</ul>'
+
+
+def profile_copy(passage, names, reading):
+    html = markdown(passage, names)
+    glosses = {'धर्म': 'Dharma — In Hinduism, dharma signifies behaviours considered to be in accord with the order that makes life and the universe possible — duty, law, ethics, and right action.', 'कर्म': 'Karma — In Indian religions, karma is the concept of action, work, or deed and its effect on the future of an individual — the spiritual principle of cause and effect.', 'Advaita Vedantic': 'Advaita Vedanta — A Hindu non-dual philosophy meaning "not two". It teaches that the individual soul (Atman) and the ultimate absolute reality (Brahman) are identical.'}
+    for label, gloss in glosses.items():
+        title, definition = gloss.split(' — ', 1)
+        key = title.lower().replace(' ', '-') + '-' + reading
+        def card(match):
+            url = match[1]
+            native = f'<span class="gloss-script" lang="sa">{label}</span>' if label != 'Advaita Vedantic' else ''
+            return (f'<span class="gloss"><a class="gloss-link" href="{url}" title="{escape(gloss)}">{label}</a>'
+                    f'<span class="gloss-card" id="gloss-{key}" role="group" aria-label="{title}" hidden>'
+                    f'<span class="gloss-heading">{native}<strong>{title}</strong></span>'
+                    f'<span class="gloss-definition">{escape(definition)}</span>'
+                    f'<a href="{url}">Read more about {title} ↗</a></span></span>')
+        html = re.sub(r'<a href="([^"]+)">' + re.escape(label) + r'</a>', card, html)
+    return html.replace('My favourite colour is green.', '<span class="favourite-green">My favourite colour is green.</span>')
+
+
+def collection_contents(label, entries):
+    rows = []
+    for note in entries:
+        if label in (note.collections or ('Made',)):
+            rows.append(f'<li><a class="entry-link" data-slug="{note.slug}" href="{note.url}">'
+                        f'<span class="entry-title">{escape(note.title)}</span> '
+                        f'<span class="entry-meta">{escape(note.date_label)}</span></a></li>')
+    return ('<ul class="entry-list" role="list">' + ''.join(rows) + '</ul>'
+            if rows else '<p class="coming-soon">Coming soon.</p>')
+
+
+def piece_page(note, names, credits):
+    collection = (note.collections or ('Made',))[0]
+    title = escape(note.title)
+    body = markdown(note.passages[0], names, '../')
+    extras = ''
+    article_class = 'reading-page'
+    if note.slug == 'guthli':
+        article_class += ' specimen'
+        extras = '<link rel="stylesheet" href="../assets/character-sheet.css?v=folio2">'
+        body = character_sheet(afterword=f'<div class="type-story prose">{body}</div>')
+    else:
+        body = f'<div class="prose">{body}</div>'
+    date = f'<p class="folio">{escape(note.date_label)}</p>' if note.date_label else ''
+    main = (f'<article class="{article_class}"><header>'
+            f'<a class="back-link" href="../index.html#{collection.lower()}">← {collection}</a>'
+            f'<h1>{title}</h1>{date}</header>{body}</article>')
+    return template('shell.html', title=f'{title} · Saanvi Mehra', description=title, wordmark=template('wordmark.html').strip(),
+                    page_class='piece-page', root='../', credits=credits, extras=extras, page_path=note.url, page_type='article',
+                    alternate=note.slug+'.html.md', main=main, skip_target='#main', skip_text='Skip to piece')
+
+
+def redirect(dest, aliases=()):
+    forward = ''
+    if aliases:
+        forward = ('<script>const ids=' + json.dumps(aliases) + ';const id=location.hash.slice(1);'
+                   'if(Object.hasOwn(ids,id)) location.replace(ids[id]);</script>')
+    return ('<!doctype html>\n' + GENERATED + '\n<html lang="en"><head><meta charset="utf-8">'
+            '<title>Saanvi Mehra</title>' + forward + f'<meta http-equiv="refresh" content="0; url={dest}">'
+            f'</head><body><a href="{dest}">Continue to Saanvi’s website</a></body></html>\n')
+
+
 def build(notes):
     names = link_map(notes)
-    outgoing = {}
-    incoming = defaultdict(set)
+    entries = sort_notes(n for n in notes.values() if n.slug != 'saanvi-mehra')
+    fruit = []
+    for cultivar, slug, x, y in FRUIT:
+        if slug not in notes:
+            continue
+        n = notes[slug]
+        stem = cultivar.lower()
+        fruit.append(f'<a class="hanging-fruit" id="pick-{slug}" href="{n.url}" data-stem="{stem}" '
+                     f'style="--x:{x}%;--y:{y}%"><img src="assets/fruit/{stem}.webp" alt="" width="88" height="104">'
+                     f'<span class="fruit-label">{escape(n.title)}<small>{cultivar}</small></span></a>')
+    credits = template('credits.html')
+    wordmark = template('wordmark.html').strip()
+    home = template('home.html', wordmark=wordmark, outer_arc=VERSE[0], inner_arc=VERSE[1], verse_end=VERSE[2], author=BYLINE[0], adaptation=BYLINE[1],
+                    fruit=''.join(fruit), profile=profile_html(notes.get('saanvi-mehra'), names),
+                    made=collection_contents('Made', entries), found=collection_contents('Found', entries))
+    pages = {'index.html': template('shell.html', title='Saanvi Mehra', wordmark=wordmark,
+                                    description='Saanvi Mehra’s writing and projects, under a mango tree.',
+                                    root='', alternate='llms.txt', page_class='tree-home', main=home, credits=credits, page_path='', page_type='website',
+                                    extras='',
+                                    skip_target='#made', skip_text='Skip to writing and projects')}
+    pages.update({n.url: piece_page(n, names, credits) for n in entries})
+    pages.update(agent_pages(notes, entries, names))
+
+    old_paths = {'garden/index.html':'made', 'connections/index.html':'made', 'about/index.html':'about-me',
+                 'notes/seventies-california.html':'found'}
+    for folder, anchor in [('reading','found'), ('music','found'), ('writing','made'),
+                           ('work','made'), ('hinduism','about-me'), ('roots','about-me')]:
+        old_paths[f'garden/{folder}.html'] = anchor
+    for slug in ('dharma-and-karma','noida','payments','intersection-sets','reading-and-translating'):
+        old_paths[f'notes/{slug}.html'] = 'about-me'
+    for path, anchor in old_paths.items():
+        aliases = {}
+        if path == 'about/index.html':
+            aliases = dict.fromkeys(('photographs', 'sound'), '../index.html#credits')
+        elif path == 'garden/index.html':
+            aliases = {key: '../index.html#' + key for key in ('found','made')}
+        pages.setdefault(path, redirect('../index.html#' + anchor, aliases))
+    specimen = '../notes/guthli.html' if 'guthli' in notes else '../index.html#made'
+    sections = ('uppercase','lowercase','numbers','extended-latin','punctuation-and-symbols',
+                'combining-marks','spaces-and-controls','workshop')
+    pages['type/characters.html'] = redirect(specimen, {key: specimen + '#' + key for key in sections} if 'guthli' in notes else {})
+    return pages
+
+
+def agent_pages(notes, entries, names):
     pages = {}
-    for n in notes.values():
-        related = {wiki_parts(m[1])[0].casefold() for m in WIKI.finditer(n.body)}
-        outgoing[n.slug] = set()
-        for key in related:
-            if key not in names:
-                raise ValueError(f'{n.title} links to an unpublished or missing note: [[{key}]].')
-            target = names[key].slug
-            if target != n.slug:
-                outgoing[n.slug].add(target)
-                incoming[target].add(n.slug)
+    def authored_text(note, root):
+        def md_link(match):
+            key, label = wiki_parts(match[1])
+            return f'[{label}]({root}{names[key.casefold()].source_page}.md)'
+        text = WIKI.sub(md_link, note.passages[0].strip())
+        if note.slug == 'guthli':
+            text += f'\n\n[Character sheet]({root}{note.url}#workshop) · [Download Guthli 1.0]({root}assets/Guthli-1.0.zip)'
+        return text
 
-    for n in notes.values():
-        back = sort_notes(notes[s] for s in incoming[n.slug])
-        backlinks = ''
-        if back:
-            backlinks = '<aside class="related"><h2>Linked from</h2><ul>' + ''.join(
-                f'<li>{note_link(b)}</li>' for b in back) + '</ul></aside>'
-        breadcrumb = f'<a href="../garden/{n.branch.lower()}.html">{n.branch}</a>'
-        meta = ' · '.join(filter(None, [n.date_label, n.kind]))
-        specimen = template('type-specimen.html') if n.slug == 'guthli' else ''
-        content = (f'<article class="reader"><p class="folio">{breadcrumb} <span>/</span> {escape(meta)}</p>'
-                   f'<h1>{escape(n.title)}</h1>{specimen}<div class="prose">{markdown(n.body, names)}</div>{backlinks}'
-                   f'<a class="map-link" href="../connections/index.html#{n.slug}">See connections</a></article>')
-        pages[n.url] = page(n.title + ' · Saanvi Mehra', 'Notebook', content)
+    for note in notes.values():
+        content = ['# ' + note.title, ' · '.join(filter(None, [note.kind, note.date_label])), authored_text(note, '../')]
+        pages[note.source_page+'.md'] = '\n\n'.join(content) + '\n\n' + GENERATED + '\n'
 
-    all_notes = sort_notes(notes.values())
-    for branch in [None, *BRANCHES]:
-        title = branch or 'The notebook'
-        subtitle = BRANCHES[branch][0] if branch else 'Essays, reading notes, and things worth keeping.'
-        filtered = [n for n in all_notes if not branch or n.branch == branch]
-        chips = []
-        for item in ['All', *BRANCHES]:
-            path = 'index' if item == 'All' else item.lower()
-            active = ' aria-current="page"' if item == (branch or 'All') else ''
-            chips.append(f'<a href="{path}.html"{active}>{item}</a>')
-        content = (f'<section class="listing"><h1>{title}</h1><p class="dek">{subtitle}</p>'
-                   f'<nav class="chips" aria-label="Notebook shelves">{"".join(chips)}</nav>'
-                   f'{rows(filtered) if filtered else "<p>No public notes on this shelf yet.</p>"}</section>')
-        pages[f'garden/{branch.lower() if branch else "index"}.html'] = page(title + ' · Saanvi Mehra','Notebook', content)
-
-    fruit = ''.join(f'<a class="fruit" href="garden/{b.lower()}.html" style="--x:{x}%;--y:{y}%" '
-                    f'aria-label="{b} shelf"><span class="fruit-mark" aria-hidden="true">+</span>'
-                    f'<span class="fruit-label">{b}</span></a>' for b, (_, x, y) in BRANCHES.items())
-    cities = ''.join(f'<button type="button" aria-pressed="{str(i == 0).lower()}" data-zone="{zone}">{city}</button>'
-                     for i, (city, zone) in enumerate([('Delhi','Asia/Kolkata'),('Philadelphia','America/New_York'),
-                                                       ('San Francisco','America/Los_Angeles')]))
-    picks = [notes[s] for s in ['stanford-essays','first-mango','lucky-13'] if s in notes]
-    home = template('home.html', fruit=fruit, cities=cities, rows=rows(picks or all_notes[:3], ''))
-    if 'first-mango' not in notes:
-        home = home.replace('notes/first-mango.html', 'https://genius.com/John-agard-english-girl-eats-her-first-mango-annotated')
-    pages['index.html'] = page('Saanvi Mehra · Under the mango tree', 'Tree', home, root='')
-    about = template('about.html')
-    for url in re.findall(r'href="\.\./(notes/[^"]+)"', about):
-        if url not in pages:
-            about = re.sub(r'<a href="\.\./' + re.escape(url) + r'">([^<]+)</a>', r'\1', about)
-    pages['about/index.html'] = page('About · Saanvi Mehra', 'About', about)
-    graph = [dict(slug=n.slug, title=n.title, branch=n.branch, kind=n.kind, url='../'+n.url,
-                  neighbours=sorted(outgoing[n.slug] | incoming[n.slug])) for n in all_notes]
-    graph_json = json.dumps(graph, ensure_ascii=False).replace('<', r'\u003c')
-    graph_page = (f'<section class="network"><h1>Connections</h1><p class="dek">One note and its neighbours. '
-                  f'Choose a title to follow the thread.</p><div id="graph"></div>'
-                  f'<script type="application/json" id="graph-data">{graph_json}</script>'
-                  f'<noscript>{rows(all_notes)}</noscript></section>')
-    pages['connections/index.html'] = page('Connections · Saanvi Mehra', 'Connections', graph_page)
+    index = ['# Saanvi Mehra']
+    if 'saanvi-mehra' in notes:
+        index.extend(['## About me', authored_text(notes['saanvi-mehra'], '')])
+    for label in ('Made', 'Found'):
+        index.append('## ' + label)
+        members = [n for n in entries if label in (n.collections or ('Made',))]
+        index.append('\n'.join(f'- [{n.title}]({n.url}) · [Markdown]({n.source_page}.md)' for n in members) or 'Coming soon.')
+    for note in entries:
+        index.extend(['## ' + note.title, authored_text(note, '')])
+    index.extend(['## Mango squeeze', '> ' + ' '.join(VERSE), ' '.join(BYLINE)])
+    pages['llms.txt'] = '\n\n'.join(index) + '\n'
     return pages
 
 
 def public_markdown(n):
-    fields = dict(title=n.title, slug=n.slug, branch=n.branch, kind=n.kind)
+    fields = dict(title=n.title, slug=n.slug, kind=n.kind)
     if n.filename not in (n.slug, n.title):
         fields['filename'] = n.filename
+    if n.collections:
+        fields['collection'] = ', '.join(n.collections)
+    if n.glimpse:
+        fields['glimpse'] = n.glimpse
     if n.date:
         fields['date'] = n.date
     return '---\n' + ''.join(f'{k}: {json.dumps(v, ensure_ascii=False)}\n' for k, v in fields.items()) + '---\n\n' + n.body + '\n'
@@ -294,9 +419,13 @@ def save(notes, pages, importing):
                     old.unlink()
         for path, text in sources.items():
             (ROOT / path).write_text(text)
-    for folder in ('writing','notes'):
+    for folder in ('writing','notes','type'):
         for old in (ROOT / folder).glob('*.html'):
             if old.relative_to(ROOT).as_posix() not in pages and GENERATED in old.read_text()[:120]:
+                old.unlink()
+    for folder in ('writing', 'notes', 'about'):
+        for old in (ROOT / folder).glob('*.html.md'):
+            if old.relative_to(ROOT).as_posix() not in pages and old.read_text().rstrip().endswith(GENERATED):
                 old.unlink()
     for path, html in pages.items():
         out = ROOT / path
@@ -313,7 +442,7 @@ if __name__ == '__main__':
         public = read_notes(args.vault)
         rendered = build(public)
         save(public, rendered, args.vault is not None)
-        print(f'Built {len(rendered)} pages from {len(public)} public notes.')
+        print(f'Built {len(rendered)} public files from {len(public)} notes.')
         if args.push is not None:
             subprocess.run([str(ROOT / 'publish'), args.push], cwd=ROOT, check=True)
     except (OSError, ValueError) as exc:

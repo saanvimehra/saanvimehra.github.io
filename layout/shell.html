@@ -1,19 +1,29 @@
 <!doctype html>
+<!-- Built by the mango notebook. -->
 <html lang="en-GB">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>$title</title>
 <meta name="description" content="$description">
-<link rel="icon" href="${root}favicon-32.png"><link rel="apple-touch-icon" href="${root}apple-touch-icon.png">
-<link rel="stylesheet" href="${root}assets/garden.css">
-<script src="${root}assets/garden.js" defer></script>
+<link rel="describedby" type="text/plain" href="${root}llms.txt">
+<link rel="alternate" type="text/markdown" href="$alternate" title="Read in Markdown">
+<link rel="icon" type="image/png" sizes="32x32" href="${root}favicon-32.png?v=sm">
+<link rel="icon" type="image/svg+xml" sizes="any" href="${root}assets/sm.svg">
+<link rel="apple-touch-icon" href="${root}apple-touch-icon.png?v=sm">
+<meta property="og:title" content="$title"><meta property="og:description" content="$description">
+<meta property="og:type" content="$page_type"><meta property="og:url" content="https://saanvimehra.com/$page_path">
+<meta property="og:image" content="https://saanvimehra.com/favicon.png?v=sm"><meta property="og:image:alt" content="sm. in Guthli">
+<meta name="twitter:card" content="summary">
+<link rel="preload" href="${root}assets/Guthli-1.0.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="${root}assets/garden.css?v=peel-contour">
+<script src="${root}assets/garden.js?v=inscription" defer></script>
+$extras
 </head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="mast">
-<a class="brand" href="${root}index.html"><img src="${root}favicon-32.png" width="25" height="25" alt="">Saanvi Mehra</a>
-<nav aria-label="Main navigation">$nav</nav>
-</header>
+<body class="$page_class">
+<a class="skip" href="$skip_target">$skip_text</a>
 <main id="main">$main</main>
-<footer class="footer"><div class="footer-sign"><i></i>Saanvi Mehra</div><div class="foot-links"><a href="https://x.com/saanvimehra">X</a><a href="https://www.linkedin.com/in/saanvimehra/">LinkedIn</a><a href="https://github.com/saanvimehra">GitHub</a><button class="theme-control" id="theme" hidden>Night</button><button id="font" hidden>Serif reading</button></div></footer>
+<footer class="footer">
+  <div class="footer-name"><a class="signature" href="${root}index.html">$wordmark</a>$credits</div>
+  <nav class="foot-links" aria-label="Footer"><a href="https://github.com/saanvimehra">GitHub</a><a href="https://www.linkedin.com/in/saanvimehra/">LinkedIn</a><a href="https://x.com/saanvimehra">X</a><a href="https://instagram.com/saanvitimehra">Instagram</a><a href="${root}llms.txt" type="text/plain">For agents</a></nav>
+</footer>
 </body></html>

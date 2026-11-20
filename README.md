@@ -6,6 +6,10 @@ Run `python3 build.py` to build from the published Markdown in `essays/` and `no
 
 The author’s Obsidian vault lives outside the repository. To import a complete public selection, run `python3 build.py --vault "/path/to/Mango notebook"`. The vault root must contain the `.mango-vault` marker. The builder mirrors Markdown from its `Tree/` folder only when the `publish` property is true. A new export withdraws previously exported notes absent from that selection. Keep a private vault outside this public checkout.
 
-Each note has a stable lowercase `slug` and a `branch` of Reading, Writing, Hinduism, Work, Roots, or Music. Optional fields are `title`, `date` (YYYY-MM or YYYY-MM-DD), and `kind`. The renderer supports paragraphs, headings, lists, blockquotes, rules, emphasis, web links, and Obsidian links with optional aliases. Links between notes use the public title or slug. The same links generate both backlinks and the interactive neighbourhood graph.
+Each note has a stable lowercase `slug` for its page address. Optional fields are `title`, `date` (YYYY-MM or YYYY-MM-DD), `kind`, and `collection` (Found, Made, or both separated by a comma). An Obsidian wikilink links to the other published note.
 
-The native essay retains its historical route at `writing/stanford-essays.html`. Nyght Serif sets the headings and quotations. Onest sets the body and interface. Both families are served locally with their licences in `assets/`.
+Made lists Guthli and both essays together, newest first. Each entry in Made or Found has a reading page linked from the homepage. Photo and sound credits expand in the footer.
+
+The complete introduction comes from the single public note with slug `saanvi-mehra`. Each fruit opens one piece. The fruit assignments are in `build.py`; their ink stems are in `assets/vine.js`.
+
+Agents can start at `/llms.txt` and follow links to individual Markdown files. The index includes the bio and the full authored text of all published pieces.
