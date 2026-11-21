@@ -62,7 +62,7 @@ button {font-size:inherit}
   .carton {width:12svh}
   .carton-verse {margin-top:1rem}
 }
-.orchard-room {width:min(94%,1290px);margin:auto;display:grid;grid-template-columns:minmax(200px,.72fr) minmax(0,1.9fr);align-items:center;column-gap:clamp(.5rem,2vw,2.4rem);padding:clamp(1rem,3vh,2rem) 0 2rem;outline:0}
+.orchard-room {width:min(94%,1290px);margin:auto;display:grid;grid-template-columns:minmax(200px,.72fr) minmax(0,1.9fr);align-items:center;column-gap:clamp(.5rem,2vw,2.4rem);padding:1rem 0 clamp(1.5rem,2vw,2rem);outline:0}
 .orchard-desk {padding-left:clamp(.4rem,2.6vw,2.8rem)}
 .orchard-welcome h1 {font-size:clamp(2.8rem,4.7vw,5.3rem);line-height:1}
 .name-i {color:transparent}
@@ -91,7 +91,7 @@ button {font-size:inherit}
 .hanging-fruit[data-stem="safeda"] .fruit-label {left:auto;right:0;transform:none}
 @media(hover:hover) {.hanging-fruit:hover .fruit-label {opacity:1}}
 @media(max-width:680px) {
-  .orchard-room {width:96%;grid-template-columns:1fr;padding:.75rem 0 1.85rem;gap:1.15rem}
+  .orchard-room {width:96%;grid-template-columns:1fr;padding-top:.75rem;gap:1.15rem}
   .tree-explorer {grid-row:1;width:min(100%,480px)}
   .orchard-desk {width:92%;margin:auto;padding:0}
   .orchard-welcome h1 {font-size:2.5rem}
@@ -127,7 +127,7 @@ button {font-size:inherit}
 }
 .hanging-fruit {z-index:2}
 
-.home-bio {width:min(89%,700px);margin:clamp(2.5rem,6vw,5rem) auto 3.5rem;scroll-margin-top:clamp(2rem,9svh,6rem);outline:0}
+.home-bio {width:min(89%,700px);margin:0 auto 3.5rem;scroll-margin-top:clamp(2rem,9svh,6rem);outline:0}
 .home-bio>h2,.home-section>h2 {font-size:clamp(1.4rem,2.1vw,1.8rem)}
 .home-bio>h2 {margin-bottom:1.15rem}
 .bio-list {list-style:none;padding:0;margin:0}
@@ -156,7 +156,7 @@ button {font-size:inherit}
 .gloss-card a {width:fit-content;font-size:.82rem}
 @media(prefers-reduced-motion:no-preference){.gloss-card:not([hidden]) {animation:gloss-in .15s ease-out}@keyframes gloss-in {from {opacity:0;transform:translateY(3px)}to {opacity:1;transform:none}}}
 .favourite-green {color:var(--green)}
-@media(min-width:681px) {.orchard-room {padding-block:1rem}.tree-explorer {width:min(100%,max(550px,86svh))}}
+@media(min-width:681px) {.tree-explorer {width:min(100%,max(550px,86svh))}}
 /* The original site set its links and underlines in this mint green.
    A deeper ink keeps the letters legible against the warm paper. */
 :root {--original-green:#5abf7a;--link-ink:#286540}

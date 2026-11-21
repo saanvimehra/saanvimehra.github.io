@@ -191,7 +191,7 @@ function paintSplash(x,y,radius,time) {
 
 const holdThreshold = 240;
 const panStart = 4.4, panEnd = 6.5;
-const fadeStart = panEnd + 6.5, finish = fadeStart + .6;
+const fadeStart = panEnd + 5.5, finish = fadeStart + .6;
 function bounded(value) { return Math.max(0, Math.min(1, value)); }
 
 function renderPour(age) {
