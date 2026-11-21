@@ -6,7 +6,7 @@ if [ "$(git branch --show-current)" != main ]; then
   exit 1
 fi
 python3 build.py
-git add -A -- essays notebook writing notes garden about connections type index.html llms.txt favicon-32.png favicon.png apple-touch-icon.png assets layout build.py publish README.md .gitignore
+git add -A -- essays notebook writing notes garden about connections type index.html llms.txt favicon.ico favicon-32.png favicon.png apple-touch-icon.png assets layout build.py publish README.md .gitignore
 if ! git diff --cached --quiet; then
   git commit -m "${1:-Update the mango notebook}"
 fi
