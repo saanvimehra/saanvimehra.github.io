@@ -62,7 +62,7 @@ button {font-size:inherit}
   .carton {width:12svh}
   .carton-verse {margin-top:1rem}
 }
-.orchard-room {width:min(94%,1290px);margin:auto;display:grid;grid-template-columns:minmax(200px,.72fr) minmax(0,1.9fr);align-items:center;column-gap:clamp(.5rem,2vw,2.4rem);padding:1rem 0 clamp(1.5rem,2vw,2rem);outline:0}
+.orchard-room {width:min(94%,1290px);margin:auto;display:grid;grid-template-columns:minmax(200px,.72fr) minmax(0,1.9fr);align-items:center;column-gap:clamp(.5rem,2vw,2.4rem);padding:1rem 0 clamp(.75rem,1vw,1rem);outline:0}
 .orchard-desk {padding-left:clamp(.4rem,2.6vw,2.8rem)}
 .orchard-welcome h1 {font-size:clamp(2.8rem,4.7vw,5.3rem);line-height:1}
 .name-i {color:transparent}
